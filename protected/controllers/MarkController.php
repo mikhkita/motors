@@ -28,16 +28,7 @@ class MarkController extends Controller
 
 		if(isset($_POST['Mark']))
 		{
-			if($_POST['Mark']['car']!="") {
-				$temp_car = Yii::app()->params['tempFolder']."/".$_POST['Mark']['car'];
-				$_POST['Mark']['car'] = Yii::app()->params['imageFolder']."/".$_POST['Mark']['car'];
-				rename($temp_car,$_POST['Mark']['car']);
-			}
-			if($_POST['Mark']['logo']!="") {
-				$temp_logo = Yii::app()->params['tempFolder']."/".$_POST['Mark']['logo'];
-				$_POST['Mark']['logo'] = Yii::app()->params['imageFolder']."/".$_POST['Mark']['logo'];
-				rename($temp_logo,$_POST['Mark']['logo']);
-			}
+			$this->renameImages($model);
 			$model->attributes=$_POST['Mark'];
 			if($model->save()){
 				$this->actionAdminIndex(true);
@@ -57,16 +48,7 @@ class MarkController extends Controller
 
 		if(isset($_POST['Mark']))
 		{
-			if($_POST['Mark']['car']!="" && $_POST['Mark']['car']!=$model->car) {
-				$temp_car = Yii::app()->params['tempFolder']."/".$_POST['Mark']['car'];
-				$_POST['Mark']['car'] = Yii::app()->params['imageFolder']."/".$_POST['Mark']['car'];
-				rename($temp_car,$_POST['Mark']['car']);
-			}
-			if($_POST['Mark']['logo']!="" && $_POST['Mark']['logo']!=$model->logo) {
-				$temp_logo = Yii::app()->params['tempFolder']."/".$_POST['Mark']['logo'];
-				$_POST['Mark']['logo'] = Yii::app()->params['imageFolder']."/".$_POST['Mark']['logo'];
-				rename($temp_logo,$_POST['Mark']['logo']);
-			}
+			$this->renameImages($model);
 			$model->attributes=$_POST['Mark'];
 			if($model->save())
 				$this->actionAdminIndex(true);
@@ -135,6 +117,19 @@ class MarkController extends Controller
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
+	}
+
+	public function renameImages($model){
+		if($_POST['Mark']['car']!="" && $_POST['Mark']['car']!=$model->car) {
+			$from = $_POST['Mark']['car'];
+			$_POST['Mark']['car'] = str_replace(Yii::app()->params['tempFolder'], Yii::app()->params['imageFolder'], $from);
+			rename($from,$_POST['Mark']['car']);
+		}
+		if($_POST['Mark']['logo']!="" && $_POST['Mark']['logo']!=$model->logo) {
+			$from = $_POST['Mark']['logo'];
+			$_POST['Mark']['logo'] = str_replace(Yii::app()->params['tempFolder'], Yii::app()->params['imageFolder'], $from);
+			rename($from,$_POST['Mark']['logo']);
+		}
 	}
 
 	public function actionAdminAdd() {

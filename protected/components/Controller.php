@@ -37,7 +37,7 @@ class Controller extends CController
         
         $this->user = User::model()->findByPk(Yii::app()->user->id);
 
-        $this->adminMenu["items"] = ModelNames::model()->findAll(array("order" => "sort ASC"));
+        $this->adminMenu["items"] = ModelNames::model()->findAll(array("order" => "sort ASC","condition" => "admin_menu=1"));
 
         foreach ($this->adminMenu["items"] as $key => $value) {
             $this->adminMenu["items"][$key] = $this->toLowerCaseModelNames($value);

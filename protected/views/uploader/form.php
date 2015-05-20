@@ -55,7 +55,7 @@ $(function () {
                     $(".plupload_filelist .plupload_done").each(function(){
                         tmpArr.push($(this).find("input").eq(0).val());
                     });
-                    $("<?=$_GET['selector']?>").val(tmpArr.join(',')).trigger("change");
+                    $("<?=$_GET['selector']?>").val(<?if(isset($_GET['tmpPath'])):?>"<?=$_GET['tmpPath']?>/"+<?endif;?>tmpArr.join(',')).trigger("change");
                     $(".plupload_save").click();
                     $(".b-save-buttons").fadeIn(300);
                 }

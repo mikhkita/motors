@@ -191,7 +191,7 @@ $(document).ready(function(){
             if( $(this).val() != "" ){
                 cont.find(".b-input-image-add").addClass("hidden");
                 cont.find(".b-image-wrap").removeClass("hidden");
-                cont.find(".b-input-image-img").css("background-image","url('/"+cont.find('.b-input-image-img').attr('data-path')+"/"+$(this).val()+"')");
+                cont.find(".b-input-image-img").css("background-image","url('/"+$(this).val()+"')");
             }else{
                 cont.find(".b-input-image-add").removeClass("hidden");
                 cont.find(".b-image-wrap").addClass("hidden");
@@ -201,17 +201,17 @@ $(document).ready(function(){
         // Удаление изображения
         $(".b-image-delete").click(function(){
             var cont = $(this).parents(".b-image-cont").parent("div");
-            // cont.find(".b-image-cancel").attr("data-url",cont.find(".b-input-image").val())// Сохраняем предыдущее изображение для того, чтобы можно было восстановить
-            //                     .show();// Показываем кнопку отмены удаления
+            cont.find(".b-image-cancel").attr("data-url",cont.find(".b-input-image").val())// Сохраняем предыдущее изображение для того, чтобы можно было восстановить
+                                .show();// Показываем кнопку отмены удаления
             cont.find(".b-input-image").val("").trigger("change");// Удаляем ссылку на фотку из поля
         });
 
         // Отмена удаления
-        // $(".b-image-cancel").click(function(){
-        //     var cont = $(this).parent("div");
-        //     cont.find(".b-input-image").val(cont.find(".b-image-cancel").attr("data-url")).trigger("change")// Возвращаем сохраненную ссылку на изображение в поле
-        //     cont.find(".b-image-cancel").hide(); // Прячем кнопку отмены удаления                                 
-        // });
+        $(".b-image-cancel").click(function(){
+            var cont = $(this).parent("div");
+            cont.find(".b-input-image").val(cont.find(".b-image-cancel").attr("data-url")).trigger("change")// Возвращаем сохраненную ссылку на изображение в поле
+            cont.find(".b-image-cancel").hide(); // Прячем кнопку отмены удаления                                 
+        });
 
     }
 
