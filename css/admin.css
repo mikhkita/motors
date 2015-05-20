@@ -1069,6 +1069,13 @@ h1{
     .b-input-image{
         display: none !important;
     }
+    .b-logo-image .b-image-wrap{
+        text-align: center;
+    }
+        .b-logo-image .b-input-image-img{
+            display: inline-block;
+            width: 150px;
+        }
     .b-input-image-add{
         cursor: pointer;
         background-position: 50% 50%;
