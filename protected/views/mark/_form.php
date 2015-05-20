@@ -17,9 +17,9 @@
 		<?php echo $form->labelEx($model,'car'); ?>
 		<div class="b-image-cancel">Отменить удаление</div>
 		<div class="b-image-cont">
-			<div data-path="<? echo Yii::app()->createUrl('/uploader/getForm',array('maxFiles'=>1,'extensions'=>'*', 'title' => 'Загрузка файла "Excel"', 'selector' => '.b-car-image .b-input-image') ); ?>" class="b-input-image-add b-get-image<? if( $model->car != "" ) echo " hidden"; ?>" title="Добавить изображение"></div>
+			<div data-path="<? echo Yii::app()->createUrl('/uploader/getForm',array('maxFiles'=>1,'extensions'=>'*', 'title' => 'Загрузка изображения автомобиля', 'selector' => '.b-car-image .b-input-image') ); ?>" class="b-input-image-add b-get-image<? if( $model->car != "" ) echo " hidden"; ?>" title="Добавить изображение"></div>
 			<div class="b-image-wrap<? if( $model->car == "" ) echo " hidden"; ?>">
-				<div class="b-input-image-img" data-base="<? echo (Yii::app()->request->baseUrl); ?>" data-path="<? echo Yii::app()->params['tempFolder']; ?>" style="background-image: url('<? echo (Yii::app()->request->baseUrl)."/".($model->car); ?>');"></div>
+				<div class="b-input-image-img" data-base="<? echo Yii::app()->request->baseUrl; ?>" data-path="<? echo Yii::app()->params['tempFolder']; ?>" style="background-image: url('<? echo (Yii::app()->request->baseUrl)."/".($model->car); ?>');"></div>
 				<?php echo $form->textField($model,'car',array('class'=>'b-input-image')); ?>
 				<?php echo $form->error($model,'car'); ?>
 				<div class="b-image-controls clearfix">
@@ -34,7 +34,7 @@
 		<?php echo $form->labelEx($model,'logo'); ?>
 		<div class="b-image-cancel">Отменить удаление</div>
 		<div class="b-image-cont">
-			<div data-path="<? echo Yii::app()->createUrl('/uploader/getForm',array('maxFiles'=>1,'extensions'=>'*', 'title' => 'Загрузка файла "Excel"', 'selector' => '.b-logo-image .b-input-image') ); ?>" class="b-input-image-add b-get-image<? if( $model->logo != "" ) echo " hidden"; ?>" title="Добавить изображение"></div>
+			<div data-path="<? echo Yii::app()->createUrl('/uploader/getForm',array('maxFiles'=>1,'extensions'=>'*', 'title' => 'Загрузка изображения логотипа', 'selector' => '.b-logo-image .b-input-image') ); ?>" class="b-input-image-add b-get-image<? if( $model->logo != "" ) echo " hidden"; ?>" title="Добавить изображение"></div>
 			<div class="b-image-wrap<? if( $model->logo == "" ) echo " hidden"; ?>">
 				<div class="b-input-image-img" data-base="<? echo (Yii::app()->request->baseUrl); ?>" data-path="<? echo Yii::app()->params['tempFolder']; ?>" style="background-image: url('<? echo (Yii::app()->request->baseUrl)."/".($model->logo); ?>');"></div>
 				<?php echo $form->textField($model,'logo',array('class'=>'b-input-image')); ?>

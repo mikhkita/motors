@@ -1,22 +1,22 @@
 <?php
 
 /**
- * This is the model class for table "mark".
+ * This is the model class for table "engine".
  *
- * The followings are the available columns in table 'mark':
+ * The followings are the available columns in table 'engine':
  * @property string $id
+ * @property string $model_id
  * @property string $name
- * @property string $car
- * @property string $logo
+ * @property integer $horsepower
  */
-class Mark extends CActiveRecord
+class Engine extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'mark';
+		return 'engine';
 	}
 
 	/**
@@ -27,12 +27,13 @@ class Mark extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name', 'required'),
+			array('model_id, name, horsepower', 'required'),
+			array('horsepower', 'numerical', 'integerOnly'=>true),
+			array('model_id', 'length', 'max'=>10),
 			array('name', 'length', 'max'=>255),
-			array('car, logo', 'length', 'max'=>1024),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, name, car, logo', 'safe', 'on'=>'search'),
+			array('id, model_id, name, horsepower', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -44,7 +45,7 @@ class Mark extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'models' => array(self::HAS_MANY, 'CarModel', 'mark_id'),
+			'model' => array(self::BELONGS_TO, 'Model', 'model_id'),
 		);
 	}
 
@@ -56,8 +57,7 @@ class Mark extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'name' => 'Название',
-			'car' => 'Автомобиль',
-			'logo' => 'Логотип',
+			'horsepower' => 'л.с.',
 		);
 	}
 
@@ -80,9 +80,9 @@ class Mark extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id,true);
+		$criteria->compare('model_id',$this->model_id,true);
 		$criteria->compare('name',$this->name,true);
-		$criteria->compare('car',$this->car,true);
-		$criteria->compare('logo',$this->logo,true);
+		$criteria->compare('horsepower',$this->horsepower);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -93,7 +93,7 @@ class Mark extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return Mark the static model class
+	 * @return Engine the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
