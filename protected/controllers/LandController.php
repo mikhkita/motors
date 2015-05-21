@@ -31,11 +31,11 @@ class LandController extends Controller
 	public function actionIndex($partial = false,$mark = false)
 	{
 		$model="";
-		if(isset($mark)) {
+		if($mark!=false && $mark!="") {
 			$model = Mark::model()->findByAttributes(array('name'=>$mark));
 			$images = array("name" => $model->name,"car" => $model->car,"logo" => $model->logo);
 		}
-		if($model=="" || !isset($model)) {
+		if($model=="") {
 			$images = array("name" => "Автомобиль","car" => "upload/images/default.png","logo" => "");
 		}
 		
