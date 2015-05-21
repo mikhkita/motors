@@ -5,8 +5,6 @@ function KitProgress(c,h){
     this.myId = "KitProgressBar";
     this.delay = 10;
     this.randInt = 10;
-    this.def = 15;
-    this.endDuration = 0.5;
 
     this.elem;
     this.timer;
@@ -35,7 +33,7 @@ function KitProgress(c,h){
     this.start = function(seconds){
         this.now = 0;
         this.max = 100;
-        this.elem.fadeIn(100);
+        this.elem.fadeIn(200);
         this.elem.css({
             "width" : 0
         });
@@ -60,13 +58,14 @@ function KitProgress(c,h){
             tmp.elem.css("width",tmp.now+"%");
             if (tmp.now>=tmp.max){
                 clearInterval(tmp.timer);
-                tmp.inc(tmp.def);
+                tmp.inc(15);
             }
         },tmp.delay);
     }
     this.end = function(callback){
+        var seconds = 0.5;
         clearInterval(this.timer);
-        this.step = (100-this.now)/(this.endDuration*1000/this.delay);
+        this.step = (100-this.now)/(seconds*1000/this.delay);
         var tmp = this;
         tmp.timer = setInterval(function(){
             tmp.now += tmp.step;
@@ -74,7 +73,7 @@ function KitProgress(c,h){
             if (tmp.now>=100){
                 tmp.elem.fadeOut(200);
                 clearInterval(tmp.timer);
-                if( callback ) callback();
+                callback();
             }
         },tmp.delay);
     }

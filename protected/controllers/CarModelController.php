@@ -91,8 +91,7 @@ class CarModelController extends Controller
 
         $criteria->order = 'id DESC';
 
-        if( $markId ){
-			$model = Mark::model()->with('models')->findByPk($markId);
+			$model = Mark::model()->with('models')->findByPk($criteria);
 		
 			if( !$partial ){
 				$this->render('adminIndex',array(

@@ -1,5 +1,5 @@
+var custom = [];
 $(document).ready(function(){	
-	var custom = [];
 
 	if( device.mobile() || device.tablet() ){
 		$(".anim").each(function(){

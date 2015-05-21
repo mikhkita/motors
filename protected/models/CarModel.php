@@ -85,6 +85,13 @@ class CarModel extends CActiveRecord
 		));
 	}
 
+	public function beforeDelete() {
+    	foreach ($this->engines as $engine) {
+        	$engine->delete();
+        }
+        return true;
+    }
+
 	/**
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!

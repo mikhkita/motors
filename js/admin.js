@@ -11,7 +11,6 @@ $(document).ready(function(){
     title = title.split(/[\/#?]+/);
     title = title[titleVar];
 
-
     $(".modules li[data-name='"+title+"'],.modules li[data-nameAlt='"+title+"']").addClass("active");    
 
     function whenResize(){
@@ -137,7 +136,17 @@ $(document).ready(function(){
 
     function bindForm($form){
         $form.validate({
-            ignore: ""
+            ignore: "",
+            rules: {
+                "Engine[horsepower]": {
+                    number: true
+                }
+            },
+            messages: {
+                "Engine[horsepower]": {
+                    number: "Поле заполнено неверно"
+                }
+            }
         });
         $form.submit(function(e,a){
             tinymce.triggerSave();

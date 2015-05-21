@@ -30,7 +30,7 @@ class LandController extends Controller
 
 	public function actionIndex($partial = false)
 	{	
-		$images = array("name" => "Автомобиль","car" => "upload/images/default.png","logo" => "");
+		$images = array("name" => "Автомобиль","car" => Yii::app()->request->baseUrl."/upload/images/default.png","logo" => "");
 		if(isset($_SERVER['HTTP_REFERER'])) {
 			$model = Mark::model()->findAll();
 			foreach ($model as $key => $value) {
@@ -39,11 +39,14 @@ class LandController extends Controller
 				$pos = strripos($_SERVER['HTTP_REFERER'], $last_word);
 				if($pos) {
 					$model = Mark::model()->findbyPk($value->id);
+					if($model->car!='') $model->car = Yii::app()->request->baseUrl."/".$model->car;
+					if($model->logo!='') $model->logo = Yii::app()->request->baseUrl."/".$model->logo;
 					$images = array("name" => $model->name,"car" => $model->car,"logo" => $model->logo);
 					break;
 				}			
 			}
 		}
+		;
 		$model = Mark::model()->with('models','models.engines')->findAll();
 		$this->render('Index',array(
 			'model' => $model,

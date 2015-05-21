@@ -89,6 +89,15 @@ class Mark extends CActiveRecord
 		));
 	}
 
+	public function beforeDelete() {
+        if(file_exists($this->car)) unlink($this->car);
+        if(file_exists($this->logo)) unlink($this->logo);
+        foreach ($this->models as $car_model) {
+        	$car_model->delete();
+        }
+        return true;
+    }
+
 	/**
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!

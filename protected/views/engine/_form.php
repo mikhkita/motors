@@ -14,7 +14,7 @@
 	</div>
 	<div class="row">
 		<?php echo $form->labelEx($model,'horsepower'); ?>
-		<?php echo $form->textField($model,'horsepower',array('maxlength'=>4,'required'=>true)); ?>
+		<?php echo $form->textField($model,'horsepower',array('maxlength'=>4,'required'=>true,'class'=>"horsepower")); ?>
 		<?php echo $form->error($model,'horsepower'); ?>
 	</div>
 	<div class="row buttons">
