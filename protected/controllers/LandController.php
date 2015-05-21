@@ -30,8 +30,9 @@ class LandController extends Controller
 
 	public function actionIndex($partial = false)
 	{	
+		$images = array("name" => "Автомобиль","car" => "upload/images/default.png","logo" => "");
 		if(isset($_SERVER['HTTP_REFERER'])) {
-			$model = Mark::model()->select("name")->findAll();
+			$model = Mark::model()->findAll();
 			foreach ($model as $key => $value) {
 				$mark = explode(" ", $value->name);
 				$last_word = array_pop($mark);
@@ -39,14 +40,10 @@ class LandController extends Controller
 				if($pos) {
 					$model = Mark::model()->findbyPk($value->id);
 					$images = array("name" => $model->name,"car" => $model->car,"logo" => $model->logo);
-				}
-				else {
-					$images = array("name" => "Автомобиль","car" => "upload/images/default.png","logo" => "");
-				}
+					break;
+				}			
 			}
-		} else {
-			$images = array("name" => "Автомобиль","car" => "upload/images/default.png","logo" => "");
-		}	
+		}
 		$model = Mark::model()->with('models','models.engines')->findAll();
 		$this->render('Index',array(
 			'model' => $model,
