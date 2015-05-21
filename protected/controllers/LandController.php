@@ -33,11 +33,15 @@ class LandController extends Controller
 		$model="";
 		if($mark) {
 			$model = Mark::model()->findByAttributes(array('name'=>$mark));
-			$images = array("name" => $model->name,"car" => $model->car,"logo" => $model->logo);
-		}
-		if($model=="") {
+			if($model=="") {
+				$images = array("name" => "Автомобиль","car" => "upload/images/default.png","logo" => "");
+			} else {
+				$images = array("name" => $model->name,"car" => $model->car,"logo" => $model->logo);
+			}	
+		} else {
 			$images = array("name" => "Автомобиль","car" => "upload/images/default.png","logo" => "");
 		}
+		
 		
 		$model = Mark::model()->with('models','models.engines')->findAll();
 		$this->render('Index',array(
