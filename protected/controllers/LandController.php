@@ -28,21 +28,25 @@ class LandController extends Controller
 		);
 	}
 
-	public function actionIndex($partial = false,$mark = false)
-	{
-		$model="";
-		if($mark) {
-			$model = Mark::model()->findByAttributes(array('name'=>$mark));
-			if($model=="") {
-				$images = array("name" => "Автомобиль","car" => "upload/images/default.png","logo" => "");
-			} else {
-				$images = array("name" => $model->name,"car" => $model->car,"logo" => $model->logo);
-			}	
+	public function actionIndex($partial = false)
+	{	
+		if(isset($_SERVER['HTTP_REFERER'])) {
+			$model = Mark::model()->select("name")->findAll();
+			foreach ($model as $key => $value) {
+				$mark = explode(" ", $value->name);
+				$last_word = array_pop($mark);
+				$pos = strripos($_SERVER['HTTP_REFERER'], $last_word);
+				if($pos) {
+					$model = Mark::model()->findbyPk($value->id);
+					$images = array("name" => $model->name,"car" => $model->car,"logo" => $model->logo);
+				}
+				else {
+					$images = array("name" => "Автомобиль","car" => "upload/images/default.png","logo" => "");
+				}
+			}
 		} else {
 			$images = array("name" => "Автомобиль","car" => "upload/images/default.png","logo" => "");
-		}
-		
-		
+		}	
 		$model = Mark::model()->with('models','models.engines')->findAll();
 		$this->render('Index',array(
 			'model' => $model,

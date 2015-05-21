@@ -81,7 +81,7 @@
                             </div>
                         </div>
                         <form action="<?php echo Yii::app()->request->baseUrl;?>/kitsend.php" method="post" data-block="#b-popup-2">
-                            <select name="1" data-brand="<?if( isset($_GET['mark']) ) echo $_GET['mark']?>" required>
+                            <select name="1" data-brand="<?if( $images['name'] != "Автомобиль" ) echo $images['name']?>" required>
                                 <option value="" disabled selected>Марка</option>
                                 <?php foreach ($model as $mark): ?>
                                     <option value="<?=$mark->name?>"><?=$mark->name?></option>
