@@ -25,19 +25,26 @@ class MarkController extends Controller
 	public function actionAdminCreate()
 	{
 		$model=new Mark;
-
 		if(isset($_POST['Mark']))
 		{
-			$this->renameImages($model);
-			$model->attributes=$_POST['Mark'];
-			if($model->save()){
-				$this->actionAdminIndex(true);
+			foreach ($_POST['Mark'] as &$value) {
+		    	$value = trim($value);
+			}
+			$mark = Mark::model()->findByAttributes(array("name" =>$_POST['Mark']['name']));
+			if($mark=="") {	
+				$this->renameImages($model);
+				$model->attributes=$_POST['Mark'];
+				if($model->save()){
+					$this->actionAdminIndex(true);
+					return true;
+				}
+			} else {
+				$this->actionAdminIndex(true,"Такое имя уже существует");
 				return true;
 			}
 		}
-
 		$this->renderPartial('adminCreate',array(
-			'model'=>$model,
+			'model'=>$model
 		));
 
 	}
@@ -48,10 +55,19 @@ class MarkController extends Controller
 
 		if(isset($_POST['Mark']))
 		{
-			$this->renameImages($model);
-			$model->attributes=$_POST['Mark'];
-			if($model->save())
-				$this->actionAdminIndex(true);
+			foreach ($_POST['Mark'] as &$value) {
+		    	$value = trim($value);
+			}
+
+			$mark = Mark::model()->findByAttributes(array("name" =>$_POST['Mark']['name']));
+			if($mark=="" || $_POST['Mark']['name']==$model->name) {	
+				$this->renameImages($model);
+				$model->attributes=$_POST['Mark'];
+				if($model->save())
+					$this->actionAdminIndex(true);
+			} else {
+				$this->actionAdminIndex(true,"Такое имя уже существует");
+			}
 		}else{
 			$this->renderPartial('adminUpdate',array(
 				'model'=>$model,
@@ -66,7 +82,7 @@ class MarkController extends Controller
 		$this->actionAdminIndex(true);
 	}
 
-	public function actionAdminIndex($partial = false)
+	public function actionAdminIndex($partial = false,$error=NULL)
 	{
 		if( !$partial ){
 			$this->layout='admin';
@@ -94,19 +110,16 @@ class MarkController extends Controller
         
 
         $model = Mark::model()->findAll($criteria);
-
+        $options = array(
+			'data'=>$model,
+			'filter'=>$filter,
+			'error' =>$error,
+			'labels'=>Mark::attributeLabels()
+		);
 		if( !$partial ){
-			$this->render('adminIndex',array(
-				'data'=>$model,
-				'filter'=>$filter,
-				'labels'=>Mark::attributeLabels()
-			));
+			$this->render('adminIndex',$options);
 		}else{
-			$this->renderPartial('adminIndex',array(
-				'data'=>$model,
-				'filter'=>$filter,
-				'labels'=>Mark::attributeLabels()
-			));
+			$this->renderPartial('adminIndex',$options);
 		}
 
 	}
@@ -120,15 +133,21 @@ class MarkController extends Controller
 	}
 
 	public function renameImages($model){
-		if($_POST['Mark']['car']!="" && $_POST['Mark']['car']!=$model->car) {
-			$from = $_POST['Mark']['car'];
-			$_POST['Mark']['car'] = str_replace(Yii::app()->params['tempFolder'], Yii::app()->params['imageFolder'], $from);
-			rename($from,$_POST['Mark']['car']);
+		if($_POST['Mark']['car']!=$model->car) {
+			if(file_exists($model->car)) unlink($model->car);
+			if($_POST['Mark']['car']!="") {
+				$from = $_POST['Mark']['car'];
+				$_POST['Mark']['car'] = str_replace(Yii::app()->params['tempFolder'], Yii::app()->params['imageFolder'], $from);
+				rename($from,$_POST['Mark']['car']);
+			}
 		}
-		if($_POST['Mark']['logo']!="" && $_POST['Mark']['logo']!=$model->logo) {
-			$from = $_POST['Mark']['logo'];
-			$_POST['Mark']['logo'] = str_replace(Yii::app()->params['tempFolder'], Yii::app()->params['imageFolder'], $from);
-			rename($from,$_POST['Mark']['logo']);
+		if($_POST['Mark']['logo']!=$model->logo) {
+			if(file_exists($model->logo)) unlink($model->logo);
+			if($_POST['Mark']['logo']!="") {
+				$from = $_POST['Mark']['logo'];
+				$_POST['Mark']['logo'] = str_replace(Yii::app()->params['tempFolder'], Yii::app()->params['imageFolder'], $from);
+				rename($from,$_POST['Mark']['logo']);
+			}
 		}
 	}
 

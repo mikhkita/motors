@@ -22,16 +22,24 @@ class CarModelController extends Controller
 		);
 	}
 
-	public function actionAdminCreate($markId)
+	public function actionAdminCreate()
 	{
 		$model=new CarModel;
 
 		if(isset($_POST['CarModel']))
 		{
-			$_POST['CarModel']['mark_id'] = $markId;
-			$model->attributes = $_POST['CarModel'];
-			if($model->save()){
-				$this->actionAdminIndex(true,$markId);
+			foreach ($_POST['CarModel'] as &$value) {
+		    	$value = trim($value);
+			}
+			$car_model = CarModel::model()->findByAttributes(array("name" =>$_POST['CarModel']['name']));
+			if($car_model=="") {	
+				$model->attributes = $_POST['CarModel'];
+				if($model->save()){
+					$this->actionAdminIndex(true);
+					return true;
+				}
+			} else {
+				$this->actionAdminIndex(true,"Такое имя уже существует");
 				return true;
 			}
 		}
@@ -42,15 +50,23 @@ class CarModelController extends Controller
 
 	}
 
-	public function actionAdminUpdate($id,$markId)
+	public function actionAdminUpdate($id)
 	{
 		$model=$this->loadModel($id);
 
 		if(isset($_POST['CarModel']))
 		{
-			$model->attributes=$_POST['CarModel'];
-			if($model->save())
-				$this->actionAdminIndex(true,$markId);
+			foreach ($_POST['CarModel'] as &$value) {
+		    	$value = trim($value);
+			}
+			$car_model = CarModel::model()->findByAttributes(array("name" =>$_POST['CarModel']['name']));
+			if($car_model=="" || $_POST['CarModel']['name']==$model->name) {
+				$model->attributes=$_POST['CarModel'];
+				if($model->save())
+					$this->actionAdminIndex(true);
+			} else {
+				$this->actionAdminIndex(true,"Такое имя уже существует");
+			}
 		}else{
 			$this->renderPartial('adminUpdate',array(
 				'model'=>$model,
@@ -58,14 +74,14 @@ class CarModelController extends Controller
 		}
 	}
 
-	public function actionAdminDelete($id,$markId)
+	public function actionAdminDelete($id)
 	{
 		$this->loadModel($id)->delete();
 
-		$this->actionAdminIndex(true,$markId);
+		$this->actionAdminIndex(true);
 	}
 
-	public function actionAdminIndex($partial = false)
+	public function actionAdminIndex($partial = false, $error = NULL)
 	{
 		if( !$partial ){
 			$this->layout='admin';
@@ -90,27 +106,19 @@ class CarModelController extends Controller
         }
 
         $criteria->order = 'id DESC';
-
-        $mark = Mark::model()->findByPk($_GET['CarModel']["mark_id"]);
-
 		$model = CarModel::model()->findAll($criteria);
-	
+		$mark = Mark::model()->findByPk($_GET['CarModel']['mark_id']);
+		$option = array(
+			'data'=>$model,
+			'mark_name' => $mark->name,
+			'filter'=>$filter,
+			'error' =>$error,
+			'labels'=>CarModel::attributeLabels()
+		);
 		if( !$partial ){
-			$this->render('adminIndex',array(
-				'data'=>$model,
-				'markId' => $mark->id,
-				'markName' => $mark->name,
-				'filter'=>$filter,
-				'labels'=>CarModel::attributeLabels()
-			));
+			$this->render('adminIndex',$option);
 		}else{
-			$this->renderPartial('adminIndex',array(
-				'data'=>$model,
-				'markId' => $mark->id,
-				'markName' => $mark->name,
-				'filter'=>$filter,
-				'labels'=>CarModel::attributeLabels()
-			));
+			$this->renderPartial('adminIndex',$option);
 		}
 
 	}

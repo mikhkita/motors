@@ -22,17 +22,24 @@ class EngineController extends Controller
 		);
 	}
 
-	public function actionAdminCreate($modelId)
+	public function actionAdminCreate()
 	{
 		$model=new Engine;
 
 		if(isset($_POST['Engine']))
 		{
-			$_POST['Engine'] = $this->clean_post($_POST['Engine']);
-			$_POST['Engine']['model_id'] = $modelId;
-			$model->attributes=$_POST['Engine'];
-			if($model->save()){
-				$this->actionAdminIndex(true,$modelId);
+			foreach ($_POST['Engine'] as &$value) {
+		    	$value = trim($value);
+			}
+			$engine = Engine::model()->findByAttributes(array("name" =>$_POST['Engine']['name']));
+			if($engine=="") {	
+				$model->attributes=$_POST['Engine'];
+				if($model->save()){
+					$this->actionAdminIndex(true);
+					return true;
+				}
+			} else {
+				$this->actionAdminIndex(true,"Такое имя уже существует");
 				return true;
 			}
 		}
@@ -43,16 +50,23 @@ class EngineController extends Controller
 
 	}
 
-	public function actionAdminUpdate($id,$modelId)
+	public function actionAdminUpdate($id)
 	{
 		$model=$this->loadModel($id);
 
 		if(isset($_POST['Engine']))
 		{
-			$_POST['Engine'] = $this->clean_post($_POST['Engine']);
-			$model->attributes=$_POST['Engine'];
-			if($model->save())
-				$this->actionAdminIndex(true,$modelId);
+			foreach ($_POST['Engine'] as &$value) {
+		    	$value = trim($value);
+			}
+			$engine = Engine::model()->findByAttributes(array("name" =>$_POST['Engine']['name']));
+			if($engine=="" || $_POST['Engine']['name']==$model->name) {	
+				$model->attributes=$_POST['Engine'];
+				if($model->save())
+					$this->actionAdminIndex(true);
+			} else {
+				$this->actionAdminIndex(true,"Такое имя уже существует");
+			}
 		}else{
 			$this->renderPartial('adminUpdate',array(
 				'model'=>$model,
@@ -60,14 +74,14 @@ class EngineController extends Controller
 		}
 	}
 
-	public function actionAdminDelete($id,$modelId)
+	public function actionAdminDelete($id)
 	{
 		$this->loadModel($id)->delete();
 
-		$this->actionAdminIndex(true,$modelId);
+		$this->actionAdminIndex(true);
 	}
 
-	public function actionAdminIndex($partial = false,$modelId = false)
+	public function actionAdminIndex($partial = false, $error = NULL)
 	{
 		if( !$partial ){
 			$this->layout='admin';
@@ -92,38 +106,22 @@ class EngineController extends Controller
         }
 
         $criteria->order = 'id DESC';
-
-        if( $modelId ){
-			$model = CarModel::model()->with('engines')->findByPk($modelId);
-			
-			if( !$partial ){
-				$this->render('adminIndex',array(
-					'data'=>$model->engines,
-					'modelId' => $modelId,
-					'modelName' => $model->name,
-					'filter'=>$filter,
-					'labels'=>Engine::attributeLabels()
-				));
-			}else{
-				$this->renderPartial('adminIndex',array(
-					'data'=>$model->engines,
-					'modelId' => $modelId,
-					'modelName' => $model->name,
-					'filter'=>$filter,
-					'labels'=>Engine::attributeLabels()
-				));
-			}
+  
+		$model = Engine::model()->findAll($criteria);
+		$car_model = CarModel::model()->findByPk($_GET['Engine']['model_id']);
+		$option = array(
+			'data'=>$model,
+			'modelName' => $car_model->name,
+			'filter'=>$filter,
+			'error' =>$error,
+			'labels'=>Engine::attributeLabels()
+		);
+		if( !$partial ){
+			$this->render('adminIndex',$option);
+		}else{
+			$this->renderPartial('adminIndex',$option);
 		}
 	}
-	public function clean_post($array) {
-		foreach ($array as $key => &$value) {
-			$value = stripslashes($value);
-		    $value = html_entity_decode($value);
-		    $value = strip_tags($value);
-		    $value = trim($value);
-		}
-		return $array;
-	} 
 	public function loadModel($id)
 	{
 		$model=Engine::model()->findByPk($id);

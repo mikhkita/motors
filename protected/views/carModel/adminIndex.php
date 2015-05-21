@@ -1,5 +1,6 @@
-<h1><?=$markName?></h1>
-<a href="<?php echo $this->createUrl('/'.$this->adminMenu["cur"]->code.'/admincreate',array('markId'=>$markId))?>" class="ajax-form ajax-create b-butt b-top-butt">Добавить</a>
+<? if( $error != NULL ) echo "<script>alert('".$error."');</script>"; ?>
+<h1><?=$mark_name?></h1>
+<a href="<?php echo $this->createUrl('/'.$this->adminMenu["cur"]->code.'/admincreate')?>" class="ajax-form ajax-create b-butt b-top-butt">Добавить</a>
 <?php $form=$this->beginWidget('CActiveForm'); ?>
 	<table class="b-table" border="1">
 		<tr>
@@ -8,7 +9,7 @@
 			<th style="width: 150px;">Действия</th>
 		</tr>
 		<tr class="b-filter">
-			<td><?php echo $form->hiddenField($filter,'mark_id'); ?></td>
+			<td><?php echo $form->hiddenField($filter, 'mark_id'); ?></td>
 			<td><?php echo CHtml::activeTextField($filter, 'name'); ?></td>
 			<td><a href="#" class="b-clear-filter">Сбросить фильтр</a></td>
 		</tr>
@@ -16,10 +17,10 @@
 			<? foreach ($data as $i => $item): ?>
 				<tr>
 					<td><?=$item->id?></td>
-					<td class="align-left"><a href="<?php echo $this->createUrl('/engine/adminindex',array('modelId'=>$item->id))?>"><?=$item->name?></a></td>
+					<td class="align-left"><a href="<?php echo $this->createUrl('/engine/adminindex',array('Engine[model_id]'=>$item->id))?>"><?=$item->name?></a></td>
 					<td class="b-tool-cont">
-						<a href="<?php echo Yii::app()->createUrl('/'.$this->adminMenu["cur"]->code.'/adminupdate',array('id'=>$item->id,'markId'=>$markId))?>" class="ajax-form ajax-update b-tool b-tool-update" title="Редактировать <?=$this->adminMenu["cur"]->vin_name?>"></a>
-						<a href="<?php echo Yii::app()->createUrl('/'.$this->adminMenu["cur"]->code.'/admindelete',array('id'=>$item->id,'markId'=>$markId))?>" class="ajax-form ajax-delete b-tool b-tool-delete" title="Удалить <?=$this->adminMenu["cur"]->vin_name?>"></a>
+						<a href="<?php echo Yii::app()->createUrl('/'.$this->adminMenu["cur"]->code.'/adminupdate',array('id'=>$item->id))?>" class="ajax-form ajax-update b-tool b-tool-update" title="Редактировать <?=$this->adminMenu["cur"]->vin_name?>"></a>
+						<a href="<?php echo Yii::app()->createUrl('/'.$this->adminMenu["cur"]->code.'/admindelete',array('id'=>$item->id))?>" class="ajax-form ajax-delete b-tool b-tool-delete" title="Удалить <?=$this->adminMenu["cur"]->vin_name?>"></a>
 					</td>
 				</tr>
 			<? endforeach; ?>
