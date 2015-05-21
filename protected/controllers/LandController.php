@@ -28,19 +28,20 @@ class LandController extends Controller
 		);
 	}
 
-	public function actionIndex($partial = false)
+	public function actionIndex($partial = false,$mark = false)
 	{
-		$model = Mark::model()->with('models','models.engines')->findAll();
-		// print_r($model);
-		if( !$partial ){
-			$this->render('Index',array(
-
-			));
-		}else{
-			$this->renderPartial('Index',array(
-
-			));
+		if($mark!=false && $mark!="") {
+			$model = Mark::model()->findByAttributes(array('name'=>$mark));
 		}
+		if($model=="" || !isset($model)) {
+			$model = Mark::model()->findByAttributes(array('name'=>'Автомобиль'));		
+		}
+		$images = array("name" => $model->name,"car" => $model->car,"logo" => $model->logo);
+		$model = Mark::model()->with('models','models.engines')->findAll();
+		$this->render('Index',array(
+			'model' => $model,
+			'images' => $images
+		));
 	}
 			
 	public function loadModel($id)

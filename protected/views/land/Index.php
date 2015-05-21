@@ -1,21 +1,3 @@
-<?
-
-    $types = array('alfaromeo' => array('img' => '<?php echo Yii::app()->request->baseUrl; ?>/i/b-1/car/alfaromeo.png', 'logo' => "<?php echo Yii::app()->request->baseUrl; ?>/i/b-1/logo/alfaromeo.png", 'text' => 'Alfa Romeo','class' => 'alfa_romeo'),
-              'chevrolet' => array('img' => '<?php echo Yii::app()->request->baseUrl; ?>/i/b-1/car/chevrolet.png', 'logo' => "<?php echo Yii::app()->request->baseUrl; ?>/i/b-1/logo/chevrolet.png", 'text' => 'Chevrolet','class' => 'chevrolet'),
-              'ford' => array('img' => '<?php echo Yii::app()->request->baseUrl; ?>/i/b-1/car/ford.png', 'logo' => "<?php echo Yii::app()->request->baseUrl; ?>/i/b-1/logo/ford.png", 'text' => 'Ford','class' => 'ford')
-            );
-    $rand = rand(0,2);
-
-    if($rand==0) {
-        $type = $types['alfaromeo'];
-    }
-    if($rand==1) {
-        $type = $types['chevrolet'];
-    }
-    if($rand==2) {
-        $type = $types['ford'];
-    }
-?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -77,7 +59,7 @@
                     </div>
                 </div>
                 <div class="content">
-                    <p>Сделайте ваш <b><?=$type['text']?></b> мощнее<br>на <b>32%</b> за <b>20</b> минут</p>
+                    <p>Сделайте ваш <b><?=$images['name']?></b> мощнее<br>на <b>32%</b> за <b>20</b> минут</p>
                     <h2>Вернем деньги, если не почувствуете результат</h2>
                 </div>
                 <div class="clearfix bot">
@@ -86,24 +68,24 @@
                             <h2>С сохранением дилерской гарантии</h2>
                             <p>Современный немецкий чип-тюнинг блок + усилитель педали газа раскроет заложенные производителем мощности автомобиля.</p>
                         </div>
-                        <img src="<?=$type['img']?>">
+                        <img src="<?=$images['car']?>">
                     </div>
                     
                     <div class="clearfix right typecar">
                         <div>
                             <div class="tc">
-                                <h2>Получите 4 варианта чип тюнинга <?=$type['text']?> прямо сейчас!</h2>
+                                <h2 class="<? if( $images['logo'] == "" ) echo " no-logo" ?>">Получите 4 варианта чип тюнинга <?=$images['name']?> прямо сейчас!</h2>
                             </div>
                             <div class="tc">
-                                <img src="<?=$type['logo']?>">
+                                <img src="<?=$images['logo']?>">
                             </div>
                         </div>
                         <form action="kitsend.php" method="post" data-block="#b-popup-2">
-                            <select name="1" data-brand="<?=$type['class']?>" required>
+                            <select name="1" data-brand="<?=$_GET['mark']?>" required>
                                 <option value="" disabled selected>Марка</option>
-                                <option value="alfa_romeo">Alfa Romeo</option>
-                                <option value="chevrolet">Chevrolet</option>
-                                <option value="ford">Ford</option>
+                                <?php foreach ($model as $mark): ?>
+                                    <option value="<?=$mark->name?>"><?=$mark->name?></option>
+                                <? endforeach; ?>
                             </select>
                             <input type="hidden" name="1-name" value="Марка"/>
                             <select name="2" required>
@@ -173,6 +155,24 @@
                 <input type="submit" class="b-green-button" onclick="$.fancybox.close(); return false;" value="Закрыть">
             </div>
         </div>
+        <?php foreach ($model as $mark): ?>
+            <select name="<?=$mark->name?>">
+                <option value="" disabled selected>Модель</option>
+            <?php foreach ($mark->models as $car_model): ?>  
+                <option value="<?=$car_model->name?>"><?=$car_model->name?></option>
+            <? endforeach; ?>
+            </select>
+        <? endforeach; ?>
+        <?php foreach ($model as $mark): ?>
+            <?php foreach ($mark->models as $car_model): ?> 
+                <select name="<?=$car_model->name?>">
+                    <option value="" disabled selected>Двигатель</option>
+                    <?php foreach ($car_model->engines as $engine): ?>  
+                        <option value="<?=$engine['name']." (".$engine['horsepower'].")"?>"><?=$engine['name']." (".$engine['horsepower'].")"?></option>
+                    <? endforeach; ?>
+                </select>
+            <? endforeach; ?>
+        <? endforeach; ?>
     </div>
 </body>
 </html>
