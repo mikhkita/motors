@@ -80,7 +80,7 @@
                                 <img src="<?=$images['logo']?>">
                             </div>
                         </div>
-                        <form action="kitsend.php" method="post" data-block="#b-popup-2">
+                        <form action="<?php echo Yii::app()->request->baseUrl;?>/kitsend.php" method="post" data-block="#b-popup-2">
                             <select name="1" data-brand="<?=$_GET['mark']?>" required>
                                 <option value="" disabled selected>Марка</option>
                                 <?php foreach ($model as $mark): ?>
@@ -105,9 +105,9 @@
                     </div>                  
                 </div>
                 <div class="sale-cont">
-                    <img src="<?php echo Yii::app()->request->baseUrl; ?>/i/b-1/triangle.png">
+                    <img src="<?php echo Yii::app()->request->baseUrl;?>/i/b-1/triangle.png">
                     <div class="sale clearfix">
-                        <img class="left" src="<?php echo Yii::app()->request->baseUrl; ?>/i/b-1/key.png">
+                        <img class="left" src="<?php echo Yii::app()->request->baseUrl;?>/i/b-1/key.png">
                         <div class="left">
                             <h2>Акция!</h2>
                             <h3>При заявке до 29 мая монтаж - в подарок!</h3>
@@ -120,7 +120,7 @@
     <div class="b b-1-1">
         <div class="clearfix b-block">
             <div>
-                <img class="lock left" src="<?php echo Yii::app()->request->baseUrl; ?>/i/lock.png">
+                <img class="lock left" src="<?php echo Yii::app()->request->baseUrl;?>/i/lock.png">
                 <p class="left">Для продолжения заполните форму</p>
             </div>
             <!-- <img class="arrow left" src="<?php echo Yii::app()->request->baseUrl; ?>/i/b-1/arrow.png"> -->
@@ -132,7 +132,7 @@
                 <div class="clearfix">
                     <h2>Заказать обратный звонок</h2>
                 </div>
-                <form action="kitsend.php" method="post" data-block="#b-popup-2">
+                <form action="<?php echo Yii::app()->request->baseUrl;?>/kitsend.php" method="post" data-block="#b-popup-2">
                     <input type="text" name="name" placeholder="Введите ваше имя" required>
                     <input type="text" name="phone" placeholder="Введите ваш телефон" required>
                     <input type="hidden" name="subject" value="Обратный звонок"/>

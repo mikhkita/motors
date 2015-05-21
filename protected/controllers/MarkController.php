@@ -135,7 +135,7 @@ class MarkController extends Controller
 	public function actionAdminAdd() {
 		$xls = $this->getXLS(Yii::app()->basePath.'/Katalog.xls');
 		$arr= array();
-		$Cars = array("Ford","Chevrolet");
+		$Cars = array("Chevrolet","Ford","Great Wall","Hyundai","KIA","Mazda","Mercedes","Mitsubishi","Nissan","Opel","SsangYong","Toyota","VW","Alfa Romeo");
 		for ($i=1; $i < count($xls); $i++) { 
 			for ($j=0; $j < count($Cars); $j++) { 
 				if($xls[$i][1]==$Cars[$j]) {
