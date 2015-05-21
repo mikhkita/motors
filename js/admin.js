@@ -127,8 +127,8 @@ $(document).ready(function(){
                 return false;
             });
             $(".b-clear-filter").click(function(){
-                $(".main form select,.main form input").val("");
-                $(".main form select,.main form input").eq(0).trigger("change");
+                $(".main form select,.main form input[type='text']").val("");
+                $(".main form select,.main form input[type='text']").eq(0).trigger("change");
                 return false;
             });
         }

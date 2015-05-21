@@ -65,7 +65,7 @@ class CarModelController extends Controller
 		$this->actionAdminIndex(true,$markId);
 	}
 
-	public function actionAdminIndex($partial = false,$markId = false)
+	public function actionAdminIndex($partial = false)
 	{
 		if( !$partial ){
 			$this->layout='admin';
@@ -91,25 +91,26 @@ class CarModelController extends Controller
 
         $criteria->order = 'id DESC';
 
-			$model = Mark::model()->with('models')->findByPk($criteria);
-		
-			if( !$partial ){
-				$this->render('adminIndex',array(
-					'data'=>$model->models,
-					'markId' => $markId,
-					'markName' => $model->name,
-					'filter'=>$filter,
-					'labels'=>CarModel::attributeLabels()
-				));
-			}else{
-				$this->renderPartial('adminIndex',array(
-					'data'=>$model->models,
-					'markId' => $markId,
-					'markName' => $model->name,
-					'filter'=>$filter,
-					'labels'=>CarModel::attributeLabels()
-				));
-			}
+        $mark = Mark::model()->findByPk($_GET['CarModel']["mark_id"]);
+
+		$model = CarModel::model()->findAll($criteria);
+	
+		if( !$partial ){
+			$this->render('adminIndex',array(
+				'data'=>$model,
+				'markId' => $mark->id,
+				'markName' => $mark->name,
+				'filter'=>$filter,
+				'labels'=>CarModel::attributeLabels()
+			));
+		}else{
+			$this->renderPartial('adminIndex',array(
+				'data'=>$model,
+				'markId' => $mark->id,
+				'markName' => $mark->name,
+				'filter'=>$filter,
+				'labels'=>CarModel::attributeLabels()
+			));
 		}
 
 	}
