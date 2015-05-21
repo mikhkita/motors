@@ -30,12 +30,13 @@ class LandController extends Controller
 
 	public function actionIndex($partial = false,$mark = false)
 	{
-		if($mark!=false && $mark!="") {
+		$model="";
+		if(isset($mark)) {
 			$model = Mark::model()->findByAttributes(array('name'=>$mark));
 			$images = array("name" => $model->name,"car" => $model->car,"logo" => $model->logo);
 		}
 		if($model=="" || !isset($model)) {
-			$images = array("name" => "Автомобиль","car" => "upload/images/default.png");
+			$images = array("name" => "Автомобиль","car" => "upload/images/default.png","logo" => "");
 		}
 		
 		$model = Mark::model()->with('models','models.engines')->findAll();
