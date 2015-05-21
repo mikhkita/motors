@@ -68,15 +68,15 @@
                             <h2>С сохранением дилерской гарантии</h2>
                             <p>Современный немецкий чип-тюнинг блок + усилитель педали газа раскроет заложенные производителем мощности автомобиля.</p>
                         </div>
-                        <img src="<?=$images['car']?>">
+                        <img class="<? if( $images['car'] == "" ) echo "hidden"?>" src="<?=$images['car']?>">
                     </div>
                     
                     <div class="clearfix right typecar">
                         <div>
                             <div class="tc">
-                                <h2 class="<? if( $images['logo'] == "" ) echo " no-logo" ?>">Получите 4 варианта чип тюнинга <?=$images['name']?> прямо сейчас!</h2>
+                                <h2 class="<? if( $images['logo'] == "" ) echo "no-logo"?>">Получите 4 варианта чип тюнинга <?if($images['name'] == "Автомобиль"):echo "Автомобиля"?><?else: echo $images['name']?><?endif;?> прямо сейчас!</h2>
                             </div>
-                            <div class="tc">
+                            <div class="tc <? if( $images['logo'] == "" ) echo "hidden"?>">
                                 <img src="<?=$images['logo']?>">
                             </div>
                         </div>
