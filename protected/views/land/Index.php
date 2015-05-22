@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl;?>/css/reset.css" type="text/css">
     <link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl;?>/css/jquery.fancybox.css" type="text/css">
     <link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl;?>/css/KitAnimate.css" type="text/css">
+    <link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl;?>/css/land-admin.css" type="text/css">
     <link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl;?>/css/land.css" type="text/css">
     <link rel="icon" type="image/vnd.microsoft.icon" href="favicon.ico">
 
@@ -29,6 +30,7 @@
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl;?>/js/KitAnimate.js"></script>
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl;?>/js/device.js"></script>
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl;?>/js/KitSend.js"></script>
+    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl;?>/js/land-admin.js"></script>
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl;?>/js/land.js"></script>
     <?php foreach ($this->scripts AS $script): ?><script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/<?php echo $script?>.js"></script><? endforeach; ?>
 </head>
@@ -47,26 +49,28 @@
         <div class="b-back">
             <div class="b-block">
                 <div class="head clearfix">
-                    <img src="<?php echo Yii::app()->request->baseUrl;?>/i/b-1/motors.png">
-                    <p>Немецкий чип-тюнинг с гарантией результата в Москве</p>
+                    <a href="<?php echo Yii::app()->request->baseUrl;?>">
+                        <img src="<?php echo Yii::app()->request->baseUrl;?>/i/b-1/motors.png">
+                    </a>
+                    <p><?=$this->getText(1)?></p>
                     <div class="clearfix right tel">
-                        <h2>Есть вопрос? Звоните - поможем!</h2>
+                        <h2><?=$this->getText(2)?></h2>
                         <div class="clearfix">
                             <img class="left" src="<?php echo Yii::app()->request->baseUrl;?>/i/b-1/tel.png">
-                            <h3 class="right">+7 (499) 399 3509</h3>
+                            <h3 class="right"><?=$this->getText(3)?></h3>
                         </div>
                         <a href="#" class="fancy" data-block="#callback">Заказать звонок</a>
                     </div>
                 </div>
                 <div class="content">
-                    <p>Сделайте ваш <b><?=$images['name']?></b> мощнее<br>на <b>32%</b> за <b>20</b> минут</p>
-                    <h2>Вернем деньги, если не почувствуете результат</h2>
+                    <p><?=$this->getText(4,array("class"=>"inline"))?> <b><?=$images['name']?></b> <?=$this->getText(5,array("class"=>"inline"))?></p>
+                    <h2><?=$this->getText(6)?></h2>
                 </div>
                 <div class="clearfix bot">
                     <div class="car-wrap left">
                         <div class="car">
-                            <h2>С сохранением дилерской гарантии</h2>
-                            <p>Современный немецкий чип-тюнинг блок + усилитель педали газа раскроет заложенные производителем мощности автомобиля.</p>
+                            <h2><?=$this->getText(7)?></h2>
+                            <p><?=$this->getText(8)?></p>
                         </div>
                         <img class="<? if( $images['car'] == "" ) echo "hidden"?>" src="<?=$images['car']?>">
                     </div>
@@ -74,7 +78,7 @@
                     <div class="clearfix right typecar">
                         <div>
                             <div class="tc">
-                                <h2 class="<? if( $images['logo'] == "" ) echo "no-logo"?>">Получите 4 варианта чип тюнинга <?if($images['name'] == "Автомобиль"):echo "Автомобиля"?><?else: echo $images['name']?><?endif;?> прямо сейчас!</h2>
+                                <h2 class="<? if( $images['logo'] == "" ) echo "no-logo"?>"><?=$this->getText(9)?> <?if($images['name'] == "автомобиль"):echo "вашего автомобиля"?><?else: echo $images['name']?><?endif;?> <?=$this->getText(10)?></h2>
                             </div>
                             <div class="tc <? if( $images['logo'] == "" ) echo "hidden"?>">
                                 <img src="<?=$images['logo']?>">
@@ -101,7 +105,7 @@
                             <input type="hidden" name="subject" value="Заявка на чип-тюнинг"/>
                             <input type="submit" class="b-green-button ajax" value="Получить 4 варианта чип тюнинга!">
                         </form>
-                        <p>Сегодня рассчитали уже <b>132</b> варианта чип-тюнинга</p>
+                        <p><?=$this->getText(11)?></p>
                     </div>                  
                 </div>
                 <div class="sale-cont">
@@ -109,8 +113,8 @@
                     <div class="sale clearfix">
                         <img class="left" src="<?php echo Yii::app()->request->baseUrl;?>/i/b-1/key.png">
                         <div class="left">
-                            <h2>Акция!</h2>
-                            <h3>При заявке до 29 мая монтаж - в подарок!</h3>
+                            <h2><?=$this->getText(12)?></h2>
+                            <h3><?=$this->getText(13)?></h3>
                         </div>
                     </div>
                 </div>
@@ -121,7 +125,7 @@
         <div class="clearfix b-block">
             <div>
                 <img class="lock left" src="<?php echo Yii::app()->request->baseUrl;?>/i/lock.png">
-                <p class="left">Для продолжения заполните форму</p>
+                <p class="left"><?=$this->getText(14)?></p>
             </div>
             <!-- <img class="arrow left" src="<?php echo Yii::app()->request->baseUrl; ?>/i/b-1/arrow.png"> -->
         </div>

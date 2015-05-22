@@ -219,13 +219,19 @@ h2{
         width: 210px;
         height: 64px;
         margin-left: -10px;
-        box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
+        /*box-shadow: inset 0 0 10px rgba(0,0,0,0.3);*/
     }
         .b-panel-icons-wrap{
-            width: 208px;
-            margin: 0px 10px;
+            font-size: 0px;
+            width: 210px;
+            margin: 0px 6px;
         }
+            .b-panel-icons-item{
+                display: inline-block;
+                width: 105px;
+            }
             .b-panel-icons-item a{
+                box-shadow: inset 0px 0px 10px rgba(0,0,0,0.5);
                 float: left;
                 height: 64px;
                 /*width: 83px;*/
@@ -245,10 +251,12 @@ h2{
                 background-image: url("../images/power_red.png");
             }
             .b-panel-icons-home a{
+                background-position: 53% 50%;
                 background-image: url("../images/home.png");
+                background-size: 40px;
             }
             .b-panel-icons-logout a{
-                background-size: 45px;
+                background-size: 33px;
                 background-image: url("../images/logout.png");
             }
 .modules{

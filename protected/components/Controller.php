@@ -26,6 +26,8 @@ class Controller extends CController
 
     public $user;
 
+    public $texts = NULL;
+
     public $start;
     public $render;
     public $debugText = "";
@@ -84,6 +86,38 @@ class Controller extends CController
     			return 'Пользователь';
     			break;
     	}
+    }
+
+    public function getText($id,$params = NULL){
+        if( $this->texts == NULL ) $this->getTexts();
+        $output = "";
+
+        if( isset($this->texts[(int)$id]) ){
+
+            if( !Yii::app()->user->isGuest ){
+                $class = ( $params != NULL && isset($params["class"]) )?(" ".$params["class"]):"";
+                $url = Yii::app()->createUrl('/text/adminupdate',array('id'=>$id,'json'=>'1'));
+                $output .= '<font class="b-kit-update'.$class.'" href="'.$url.'" data-id="'.$id.'">';
+            }
+
+            $output .= $this->texts[(int)$id];
+
+            if( !Yii::app()->user->isGuest ){
+                $output .= '</font>';
+            }
+        }
+
+        return $output;
+    }
+
+    public function getTexts(){
+        $model = Text::model()->findAll();
+
+        $this->texts = array();
+
+        foreach ($model as $text) {
+            $this->texts[$text->id] = $text->text;
+        }
     }
 
     public function toLowerCaseModelNames($el){

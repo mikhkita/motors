@@ -1,0 +1,128 @@
+@charset "utf-8";
+.b-kit-update{
+    cursor: text;
+    display: inline-block;
+}
+    .b-kit-update:hover{
+        box-shadow: 0px 0px 0px 1px #FFF;
+    }
+    .inline{
+        display: inline;
+    }
+.b-kit-popup{
+    background-color: #F5E9BC;
+    padding: 15px 20px 20px 20px !important;
+    border-radius: 5px;
+}
+.b-kit-popup.b-popup-delete{
+    padding: 30px !important;
+}
+.b-kit-popup.b-popup-delete h1{
+    width: 340px;
+}
+.fancybox-wrap{
+    margin-bottom: 30px;
+}
+.fancybox-inner,.fancybox-outer {
+    height: auto !important;
+}
+    .b-kit-popup h1{
+        font-size: 23px;
+        text-align: center;
+    }
+    .b-kit-popup .row{
+        position: relative;
+        text-align: left;
+        margin-top: 15px;
+        padding: 0px 5px;
+    }
+        .b-kit-popup span.required{
+            /*display: none;*/
+            color: #D26A44;
+        }
+        .b-kit-popup label{
+            display: block;
+            margin-bottom: 5px;
+        }
+        .b-kit-popup input,
+        .b-kit-popup select{
+            border-radius: 5px;
+            /*margin-top: 5px;*/
+            background-color: #FFF5D1;
+            border: 1px solid #452716;
+            padding: 5px 10px;
+            font-size: 14px;
+            display: block;
+            width: 420px;
+            /*height: 32px;*/
+        }
+        .b-kit-popup select{
+            width: auto;
+            height: 32px;
+        }
+        .b-kit-popup textarea{
+            /*margin-top: 5px;*/
+            border-radius: 5px;
+            background-color: #FFF5D1;
+            border: 1px solid #452716;
+            padding: 5px 10px;
+            font-size: 14px;
+            width: 420px;
+            resize: none;
+            height: 240px;
+        }
+        .b-kit-popup .texts-row{
+            /*width: 420px;*/
+            /*display: inline-block;*/
+        }
+        .b-kit-popup .texts-input{
+            /*width: 800px;*/
+        }
+        .b-kit-popup .texts-textarea{
+            /*width: 800px;*/
+        }
+    .b-kit-popup .buttons{
+        text-align: center;
+    }
+        .b-kit-popup .buttons input[type='submit'],
+        .b-kit-popup .buttons input[type='button']{
+            border: 0px;
+            cursor: pointer; 
+            background-color: #452716;
+            display: inline-block;
+            margin: 0px auto;
+            padding: 10px 20px;
+            color: #F5E9BC;
+            height: auto;
+            text-shadow: 0 2px 1px rgba(0,0,0,0.5);
+            text-decoration: none;
+            width: auto;
+        }
+        .b-kit-popup .buttons input[type='button']{
+            margin: 0px 5px 0px 10px;
+        }
+        .b-kit-popup.b-popup-delete input[type='button']{
+            width: 100px;
+        }
+            .b-kit-popup .buttons input[type='submit']:hover,
+            .b-kit-popup .buttons input[type='button']:hover{
+                background-color: #D26A44;
+            }
+        .b-kit-popup .buttons .blocked{
+            background-color: #ABABAB !important;
+            color: #DADADA !important;
+        }
+            .b-kit-popup .buttons .blocked:hover{
+                cursor: default !important;
+                background-color: #ABABAB !important;
+                color: #DADADA !important;
+            }
+            .b-kit-popup label.error{
+                position: absolute;
+                right: 5px;
+                top: 0px;
+                color: #D26A44;
+            }
+            .b-kit-popup input.error{
+                /*background-color: #D26A44;*/
+            }

@@ -105,7 +105,7 @@ class EngineController extends Controller
             }
         }
 
-        $criteria->order = 'id DESC';
+        $criteria->order = 'name ASC';
   
 		$model = Engine::model()->findAll($criteria);
 		$car_model = CarModel::model()->findByPk($_GET['Engine']['model_id']);

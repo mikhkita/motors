@@ -105,7 +105,7 @@ class CarModelController extends Controller
             }
         }
 
-        $criteria->order = 'id DESC';
+        $criteria->order = 'name ASC';
 		$model = CarModel::model()->findAll($criteria);
 		$mark = Mark::model()->findByPk($_GET['CarModel']['mark_id']);
 		$option = array(

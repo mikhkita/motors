@@ -106,7 +106,7 @@ class MarkController extends Controller
             }
         }
 
-        $criteria->order = 'id DESC';
+        $criteria->order = 'name ASC';
         
 
         $model = Mark::model()->findAll($criteria);

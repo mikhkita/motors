@@ -30,7 +30,7 @@ class LandController extends Controller
 
 	public function actionIndex($partial = false)
 	{	
-		$images = array("name" => "Автомобиль","car" => Yii::app()->request->baseUrl."/upload/images/default.png","logo" => "");
+		$images = array("name" => "автомобиль","car" => Yii::app()->request->baseUrl."/upload/images/default.png","logo" => "");
 		if(isset($_SERVER['HTTP_REFERER'])) {
 			$model = Mark::model()->findAll();
 			foreach ($model as $key => $value) {

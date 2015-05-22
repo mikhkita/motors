@@ -95,7 +95,7 @@ select::-ms-expand {
 }
 
 .ps-lines{
-	/*display: none;*/
+	display: none;
 }
 	.ps-lines li.v{
 		position: fixed;
@@ -147,6 +147,7 @@ select::-ms-expand {
 	position: relative;
 	width: 1000px;
 	margin: 0 auto;
+	height: inherit;
 }
 .b-absolute{
 	position: absolute;
@@ -211,10 +212,12 @@ input:-moz-placeholder {
 		position: absolute;
 		left: 0px;
 		top: 0px;
-	}
+	
+		height: 890px;
+}
 
 		.b-1 .head{	
-			margin-top: 27px;
+			padding-top: 27px;
 	
 		}
 
@@ -346,14 +349,13 @@ input:-moz-placeholder {
 				background-color: #131313;
 				box-shadow: 3px -3px 38px 1px #222;
 				box-sizing: border-box;
-}
+			}
 				.b-1 .typecar>div {
+					min-height: 55px;
 					margin-bottom: 2px;
 					display: table;
-					
-				
 					width: 100%;
-}
+				}
 				.b-1 .typecar>div .tc {
 					display: table-cell;
 					vertical-align: middle;
@@ -370,6 +372,7 @@ input:-moz-placeholder {
 				}
 				.b-1 .typecar img{
 					max-height: 59px;
+					max-width: 100px;
 				}
 
 				.b-1 .typecar input[type="text"], .b-popup input[type="text"]{
@@ -446,7 +449,9 @@ input:-moz-placeholder {
 					width: 286px;
 				}
 	.b-1 .sale-cont {
-		float: right;
+		position: absolute;
+		right: 0px;
+		bottom: 0px;
 		width: 330px;
 		font-size: 0;
 	
@@ -455,7 +460,7 @@ input:-moz-placeholder {
 		.b-1 .sale {
 			background-color: #009fe3;
 			padding-left: 34px;
-		
+			padding-top: 1px;
 			padding-bottom: 27px;
 		}
 			.b-1 .sale img {
@@ -1565,16 +1570,19 @@ input:-moz-placeholder {
 }
 .b-popup p {
 
-	font-size: 18px;
+	font-size: 19px;
 	color: #fdfdfd;	
 	margin-top: 18px;
-	line-height: 20px;
+	line-height: 25px;
 	text-align: center;
 	margin-top: 0;
 }
 .fancybox-inner .b-popup{
 	margin-bottom: 0px;
 	padding: 20px;
+}
+.b-thanks input[type="submit"]{
+	  margin-bottom: 10px;
 }
 @media screen and (max-width: 1250px){
 	

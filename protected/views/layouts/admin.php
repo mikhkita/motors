@@ -48,7 +48,8 @@
                 <div class="b-panel">
                     <div class="b-panel-icons">
                         <div class="b-panel-icons-wrap">
-                            <div class="b-panel-icons-item b-panel-icons-logout"><a title="Выйти" href="<?php echo $this->createUrl('site/logout')?>"></a></div>
+                            <div class="b-panel-icons-item b-panel-icons-home clearfix"><a title="На сайт" href="/"></a></div>
+                            <div class="b-panel-icons-item b-panel-icons-logout clearfix"><a title="Выйти" href="<?php echo $this->createUrl('site/logout')?>"></a></div>
                        </div>
                     </div>
                 </div>
