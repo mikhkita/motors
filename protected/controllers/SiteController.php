@@ -101,7 +101,7 @@ class SiteController extends Controller
 	public function actionLogout()
 	{
 		Yii::app()->user->logout();
-		$this->redirect(Yii::app()->params['adminPanel']);
+		$this->redirect("/");
 	}
 
 	public function actionUpload(){

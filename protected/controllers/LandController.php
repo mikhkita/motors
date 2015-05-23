@@ -61,4 +61,11 @@ class LandController extends Controller
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
 	}
+
+	public function topMenu(){
+		if( Yii::app()->user->isGuest ) return false;
+		$this->render('topMenu',array(
+
+		));
+	}
 }

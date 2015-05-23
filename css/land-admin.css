@@ -126,3 +126,148 @@
             .b-kit-popup input.error{
                 /*background-color: #D26A44;*/
             }
+.b-kit-top{
+    position: relative;
+    height: 44px;
+}   
+    .b-kit-top-fixed{
+        background-color: #F5E9BC;
+        border-bottom: 5px solid #452716;
+        width: 100%;
+        position: fixed;
+        left: 0px;
+        top: 0px;
+        z-index: 10;
+    }
+    .b-kit-top .b-block{
+
+    }
+        .b-kit-top-menu{
+            
+        }
+            .b-kit-top-menu li{
+                float: left;
+            }
+                .b-kit-top-menu li a,
+                .b-kit-top-user a{
+                    color: #452716;
+                    display: block;
+                    padding: 10px 20px;
+                }
+                    .b-kit-top-menu li a:hover,
+                    .b-kit-top-user a:hover{
+                        background-color: #D26A44;
+                        color: #F5E9BC;
+                        text-shadow: 0px 0px 1px rgba(0,0,0,0.5);
+                    }
+        .b-kit-top-user{
+            
+        }
+            .b-kit-top-user span{
+                display: block;
+                color: #452716;
+                padding: 10px 0px;
+            }
+            .b-kit-top-user a{
+                margin-left: 20px;
+            }
+        .b-kit-top-edit{
+            margin-right: 20px;
+            padding: 10px 20px 0px;
+            display: inline-block;
+        }   
+            .b-kit-top-edit span{
+                color: #452716;
+            }
+            .b-kit-switcher {
+                margin-left: 15px;
+                margin-top: -1px;
+                display: inline-block;
+                width:67px;
+                height:18px;  
+                background-color:silver;
+                position:relative;
+                overflow:hidden;
+                white-space:nowrap;
+                border-radius:100px;                
+                padding:2px;
+                box-shadow: inset 0px 3px 10px 0px rgba(0, 0, 0, 0.4);
+                font-family:sans-serif;
+                font-size:14px;
+                -webkit-transition: all 0.1s ease-in-out;
+                -moz-transition: all 0.1s ease-in-out;
+                -o-transition: all 0.1s ease-in-out;
+                transition: all 0.1s ease-in-out;
+                background-size: 28px 28px;
+                position: relative;
+                background-color: #F5E9BC;
+                /*margin-right: 10px;*/
+            }
+            .b-kit-rail {
+                position:absolute;
+                top:2px;
+                left:-36px;
+                -webkit-transition: all 0.1s ease-in-out;
+                -moz-transition: all 0.1s ease-in-out;
+                -o-transition: all 0.1s ease-in-out;
+                transition: all 0.1s ease-in-out;
+                cursor: pointer;
+            }
+            .b-kit-state1 {
+                text-shadow: 0 1px 1px rgba(0,0,0,0.5);
+                display: inline-block;
+                height:24px;
+                position:relative;
+                top: -4px;
+                left: -2px;      
+                padding-left: 5px; 
+                color: #F5E9BC;           
+            }
+            .b-kit-state2 {
+                display: inline-block;
+                height:24px;
+                position:relative;
+                top: -4px;
+                left: 1px;                
+                color:#452716;    
+            }
+            .b-kit-slider {
+                display: inline-block;
+                height:18px;
+                width:18px;
+                position:relative;
+                border-radius:100px;  
+                background-color:#ccc;
+                box-shadow: 0px 3px 4px 0px rgba(0, 0, 0, 0.2), inset 0px 1px 1px 1px rgba(255, 255, 255, 0.7);
+            }
+            .b-kit-switcher.checked .b-kit-rail{
+                left:13px;
+            }
+            .b-kit-switcher.checked {
+                background-color: #D26A44;
+                box-shadow: inset 0px 3px 10px 0px rgba(0, 0, 0, 0.4);
+            }
+            .b-kit-switcher:hover {
+                /*background-image: url('../images/toggle_back.png');*/
+                background-image: -webkit-gradient(linear, left top, right bottom, 
+                     color-stop(0%,rgba(69, 39, 22,0)), 
+                    color-stop(25%,rgba(69, 39, 22,0)), 
+                    color-stop(25%,rgba(69, 39, 22,.1)), 
+                    color-stop(50%,rgba(69, 39, 22,.1)), 
+                    color-stop(50%,rgba(69, 39, 22,0)), 
+                    color-stop(75%,rgba(69, 39, 22,0)), 
+                    color-stop(75%,rgba(69, 39, 22,.1)), 
+                   color-stop(100%,rgba(69, 39, 22,.1)));   
+            }
+            .b-kit-switcher.checked:hover {
+                /*background-image: url('../images/toggle_back.png');*/
+                background-image: -webkit-gradient(linear, left top, right bottom, 
+                     color-stop(0%,rgba(255,255,255,0)), 
+                    color-stop(25%,rgba(255,255,255,0)), 
+                    color-stop(25%,rgba(255,255,255,.15)), 
+                    color-stop(50%,rgba(255,255,255,.15)), 
+                    color-stop(50%,rgba(255,255,255,0)), 
+                    color-stop(75%,rgba(255,255,255,0)), 
+                    color-stop(75%,rgba(255,255,255,.15)), 
+                   color-stop(100%,rgba(255,255,255,.15)));  
+            }

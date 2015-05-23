@@ -12,6 +12,12 @@ function KitProgress(c,h){
     this.step;
     this.max;
 
+    this.setTop = function(top){
+        this.elem.css({
+            "top": top
+        });
+    }
+
     this.init = function(){
         var html = $("<div id='"+this.myId+"'></div>");
         $("body").prepend(html);

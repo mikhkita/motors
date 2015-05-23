@@ -1,10 +1,28 @@
 var customHandlersAdmin = [];
+
+$.fn.setCursorPosition = function(pos) {
+    this.each(function(index, elem) {
+    if (elem.setSelectionRange) {
+        elem.setSelectionRange(pos, pos);
+    } else if (elem.createTextRange) {
+        var range = elem.createTextRange();
+        range.collapse(true);
+        range.moveEnd('character', pos);
+        range.moveStart('character', pos);
+        range.select();
+    }
+    });
+    return this;
+};
 $(document).ready(function(){   
     var myWidth,
         myHeight,
-        progress = new KitProgress("#FFF",2);
+        progress = new KitProgress("#D26A44",5);
 
     progress.endDuration = 0.3;
+    progress.setTop(39);
+
+    checkCookie();
 
     function whenResize(){
         if( typeof( window.innerWidth ) == 'number' ) {
@@ -42,8 +60,15 @@ $(document).ready(function(){
             }
         },
         afterShow: function(){
-            $(".fancybox-inner").find("input,textarea").eq(0).focus();
+            var field = $(".fancybox-inner").find("input,textarea").eq(0);
+            field.focus();
+            field.setCursorPosition(field.val().length);
         }
+    });
+
+    $(".b-kit-switcher").click(function(){
+        toggleMode(!$(this).hasClass("checked"));
+        return false;
     });
 
     function bindForm($form){
@@ -58,7 +83,6 @@ $(document).ready(function(){
 
                 $(this).find("input[type=submit]").addClass("blocked");
 
-                progress.setColor("#FFF");
                 progress.start(3);
 
                 if( $form.attr("data-beforeAjax") && customHandlers[$form.attr("data-beforeAjax")] ){
@@ -177,3 +201,65 @@ $(document).ready(function(){
 
     // bindImageUploader();
 });
+
+function getCookie(name) {
+        var matches = document.cookie.match(new RegExp(
+          "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+        ));
+        return matches ? decodeURIComponent(matches[1]) : null;
+    }
+
+    function setCookie(name, value, options) {
+        options = options || {};
+    
+        var expires = options.expires;
+    
+        if (typeof expires == "number" && expires) {
+            var d = new Date();
+            d.setTime(d.getTime() + expires * 1000);
+            expires = options.expires = d;
+        }
+        if (expires && expires.toUTCString) {
+            options.expires = expires.toUTCString();
+        }
+    
+        value = encodeURIComponent(value);
+    
+        var updatedCookie = name + "=" + value;
+    
+        for (var propName in options) {
+            updatedCookie += "; " + propName;
+            var propValue = options[propName];
+            if (propValue !== true) {
+                updatedCookie += "=" + propValue;
+            }
+        }
+    
+        document.cookie = updatedCookie;
+    }
+
+    function deleteCookie(name) {
+        setCookie(name, "", {
+            expires: -1
+        })
+    }
+
+    function checkCookie(){
+        if( getCookie("edit") != null ){
+            toggleMode(1);
+        }else{
+            toggleMode(0);
+        }
+    }
+
+    function toggleMode(tog){
+        if( tog ){
+            setCookie("edit",1);
+            $(".b-kit-switcher").addClass("checked");
+            $(".b-kit-not-update").removeClass("b-kit-not-update").addClass("b-kit-update");
+        }else{
+            deleteCookie("edit");
+            $(".b-kit-switcher").removeClass("checked");
+            $(".b-kit-update").removeClass("b-kit-update").addClass("b-kit-not-update");
+        }
+    }

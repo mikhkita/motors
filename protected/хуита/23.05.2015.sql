@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: localhost
--- Время создания: Май 23 2015 г., 03:32
+-- Время создания: Май 23 2015 г., 13:44
 -- Версия сервера: 5.6.22
 -- Версия PHP: 5.4.38
 
@@ -3172,7 +3172,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`usr_id`, `usr_login`, `usr_password`, `usr_name`, `usr_email`, `usr_role`, `usr_state`) VALUES
-(1, 'root', 'eaaba36a95aedcfd1c21a0d011e12ecd', 'Иванов И.И.', 'beatbox787@gmail.com', 'root', 1);
+(1, 'root', 'eaaba36a95aedcfd1c21a0d011e12ecd', 'Иванов И. И.', 'beatbox787@gmail.com', 'root', 1);
 
 --
 -- Индексы сохранённых таблиц

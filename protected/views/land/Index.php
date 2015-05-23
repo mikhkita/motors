@@ -35,6 +35,7 @@
     <?php foreach ($this->scripts AS $script): ?><script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/<?php echo $script?>.js"></script><? endforeach; ?>
 </head>
 <body>
+    <?=$this->topMenu();?>
     <ul class="ps-lines">
         <li class="v" style="margin-left:-501px"></li>
         <li class="v" style="margin-left:500px"></li>
@@ -42,7 +43,7 @@
     </ul>
     <div class="b b-1">
         <div class="b-video-cont">
-            <video class="b-video" poster="<?php echo Yii::app()->request->baseUrl;?>/i/b-1/video.jpg" autoplay loop muted id="bgvideo">
+            <video class="b-video" autoplay loop muted id="bgvideo">
                 <source src="<?php echo Yii::app()->request->baseUrl;?>/video/5.mp4" type="video/mp4"></source>
             </video>
         </div>

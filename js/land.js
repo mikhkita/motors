@@ -22,6 +22,8 @@ $(document).ready(function(){
     $(window).resize(resize);
     resize();
 
+    $('.b-video').fadeIn(500);
+
     $("select[name='1']").change(function(){
         var mark = $("select[name='1'] option:selected").val();
         $("select[name='2'],select[name='3']").empty();

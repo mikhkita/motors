@@ -198,6 +198,7 @@ input:-moz-placeholder {
 		height: 750px;	
 	}
 		.b-video{
+			display: none;
 			width: 100%;
 			min-height: 920px;
 			position: absolute;
