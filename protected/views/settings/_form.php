@@ -12,19 +12,11 @@
 		<?php echo $form->textField($model,'name',array('maxlength'=>255,'required'=>true)); ?>
 		<?php echo $form->error($model,'name'); ?>
 	</div>
-
 	<div class="row">
-		<?php echo $form->labelEx($model,'good_type_id'); ?>
-		<?php echo $form->dropDownList($model, 'good_type_id', CHtml::listData(GoodType::model()->findAll(), 'id', 'name')); ?>
-		<?php echo $form->error($model,'good_type_id'); ?>
+		<?php echo $form->labelEx($model,'horsepower'); ?>
+		<?php echo $form->textField($model,'horsepower',array('maxlength'=>4,'required'=>true,'class'=>"horsepower")); ?>
+		<?php echo $form->error($model,'horsepower'); ?>
 	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'template'); ?>
-		<?php echo $form->textArea($model,'template',array('maxlength'=>2000,'required'=>true,'style'=>'height: 300px;')); ?>
-		<?php echo $form->error($model,'template'); ?>
-	</div>
-
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Добавить' : 'Сохранить'); ?>
 		<input type="button" onclick="$.fancybox.close(); return false;" value="Отменить">

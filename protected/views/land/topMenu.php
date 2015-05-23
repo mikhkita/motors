@@ -7,7 +7,7 @@
 	            <?endforeach;?>
 	        </ul>
 	        <div class="b-kit-top-user right">
-	            <span class="left"><? echo $this->user->usr_name; ?> (<? echo mb_strtolower($this->getUserRoleRus()); ?>)</span> <a href="<?php echo $this->createUrl('site/logout')?>" class="right">Выйти</a>
+	            <span class="left"><? echo $this->user->usr_name; ?> (<? echo mb_strtolower($this->getUserRoleRus(),"UTF-8"); ?>)</span> <a href="<?php echo $this->createUrl('site/logout')?>" class="right">Выйти</a>
 	        </div>
 	        <div class="b-kit-top-edit right">
 	        	<span>Режим правки: </span>
