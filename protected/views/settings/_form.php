@@ -9,13 +9,20 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'name'); ?>
-		<?php echo $form->textField($model,'name',array('maxlength'=>255,'required'=>true)); ?>
+		<?php echo $form->textField($model,'name',array('maxlength'=>255,'required'=>true,'disabled'=> !( $this->getUserRole() == "root" ) )); ?>
 		<?php echo $form->error($model,'name'); ?>
 	</div>
+<? if( $this->getUserRole() == "root" ):  ?>
 	<div class="row">
-		<?php echo $form->labelEx($model,'horsepower'); ?>
-		<?php echo $form->textField($model,'horsepower',array('maxlength'=>4,'required'=>true,'class'=>"horsepower")); ?>
-		<?php echo $form->error($model,'horsepower'); ?>
+		<?php echo $form->labelEx($model,'code'); ?>
+		<?php echo $form->textField($model,'code',array('maxlength'=>255,'required'=>true)); ?>
+		<?php echo $form->error($model,'code'); ?>
+	</div>
+<? endif; ?>
+	<div class="row">
+		<?php echo $form->labelEx($model,'value'); ?>
+		<?php echo $form->textArea($model,'value',array('class'=>"b-settings-textarea")); ?>
+		<?php echo $form->error($model,'value'); ?>
 	</div>
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Добавить' : 'Сохранить'); ?>

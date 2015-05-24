@@ -61,6 +61,9 @@
                 <?foreach ($this->adminMenu["items"] as $i => $menuItem):?>
                     <li data-name="<?=$menuItem->code?>"><a href="<?php echo $this->createUrl('/'.$menuItem->code.'/adminindex')?>"><?=$menuItem->name?></a></li>
                 <?endforeach;?>
+                <? if( $this->getUserRole() == "root" ):  ?>
+                    <li data-name="user"><a href="<?php echo $this->createUrl('/user/adminindex')?>">Пользователи</a></li>
+                <? endif; ?>
                 <? 
                 // endif; 
                 ?>

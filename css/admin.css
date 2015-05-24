@@ -478,6 +478,9 @@ h1{
             resize: none;
             height: 400px;
         }
+        textarea.b-settings-textarea{
+            height: 250px;
+        }
         .fancybox-skin .texts-row{
             /*width: 420px;*/
             /*display: inline-block;*/
@@ -1118,12 +1121,16 @@ h1{
     .b-image-controls{
         position: absolute;
         left: 50%;
-        margin-left: -60px;
-        bottom: 11px;
+        margin-left: -61px;
+        bottom: 1px;
+        border: 1px solid #452716;
+        border-radius: 5px 5px 0px 0px;
+        border-bottom: 0px;
+        opacity: 0;
     }
         .b-image-nav{
             cursor: pointer;
-            opacity: 0.2;
+            opacity: 0;
             float: left;
             background-position: 50% 50%;
             background-repeat: no-repeat;
@@ -1135,14 +1142,20 @@ h1{
             .b-image-cont:hover .b-image-nav{
                 opacity: 0.5;
             }
+            .b-image-cont:hover .b-image-controls{
+                opacity: 1;
+            }
             .b-image-cont .b-image-nav:hover{
                 opacity: 1;
             }
         .b-image-edit{
+            border-right: 1px solid #452716;
             border-radius: 5px 0px 0px 0px;
             background-image: url('../images/edit.png');
         }
         .b-image-delete{
+            border-left: 1px solid #452716;
+            margin-left: -1px;
             border-radius: 0px 5px 0px 0px;
             background-image: url('../images/delete.png');
         }

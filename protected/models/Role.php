@@ -1,22 +1,21 @@
 <?php
 
 /**
- * This is the model class for table "settings".
+ * This is the model class for table "role".
  *
- * The followings are the available columns in table 'settings':
+ * The followings are the available columns in table 'role':
  * @property string $id
- * @property string $name
- * @property string $value
  * @property string $code
+ * @property string $name
  */
-class Settings extends CActiveRecord
+class Role extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'settings';
+		return 'role';
 	}
 
 	/**
@@ -27,13 +26,12 @@ class Settings extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name, code', 'required'),
-			array('name', 'length', 'max'=>255),
-			array('code', 'length', 'max'=>50),
-			array('value', 'safe'),
+			array('code, name', 'required'),
+			array('code', 'length', 'max'=>20),
+			array('name', 'length', 'max'=>50),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, name, value, code', 'safe', 'on'=>'search'),
+			array('id, code, name', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -45,6 +43,7 @@ class Settings extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'users' => array(self::HAS_MANY, 'User', 'usr_id', 'order' => 'usr_code'),
 		);
 	}
 
@@ -54,10 +53,9 @@ class Settings extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'ID',
-			'name' => 'Параметр',
-			'value' => 'Значение',
-			'code' => 'Код',
+			'id' => 'Rol',
+			'code' => 'Rol Code',
+			'name' => 'Rol Name',
 		);
 	}
 
@@ -80,9 +78,8 @@ class Settings extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id,true);
-		$criteria->compare('name',$this->name,true);
-		$criteria->compare('value',$this->value,true);
 		$criteria->compare('code',$this->code,true);
+		$criteria->compare('name',$this->name,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -93,7 +90,7 @@ class Settings extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return Settings the static model class
+	 * @return Role the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{

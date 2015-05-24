@@ -33,6 +33,7 @@ class Controller extends CController
     public $debugText = "";
 
     public $adminMenu = array();
+    public $settings = NULL;
 
     public function init() {
         parent::init();
@@ -56,7 +57,7 @@ class Controller extends CController
         $this->render = microtime(true);
 
         $this->debugText = "Controller ".round(microtime(true) - $this->start,4);
-
+        
         return true;
     }
 
@@ -67,25 +68,16 @@ class Controller extends CController
     }
 
     public function getUserRole(){
-        return $this->user->usr_role;
+        return $this->user->role->code;
     }
 
     public function getUserRoleRus() {
-    	switch ($this->user->usr_role){
-    		case 'root':
-    			return 'Создатель';
-    			break;
-    		case 'admin':
-    			return 'Администратор';
-    			break;
-    		case 'manager':
-    			return 'Пользователь';
-    			break;
+    	return $this->user->role->name;
+    }
 
-    		default:
-    			return 'Пользователь';
-    			break;
-    	}
+    public function getUserRoleFromModel(){
+        $user = User::model()->findByPk(Yii::app()->user->id);
+        return $user->role->code;
     }
 
     public function getText($id,$params = NULL){
@@ -117,6 +109,22 @@ class Controller extends CController
 
         foreach ($model as $text) {
             $this->texts[$text->id] = $text->text;
+        }
+    }
+
+    public function getParam($code){
+        if( $this->settings == NULL ) $this->getSettings();
+
+        return $this->settings[mb_strtoupper($code,"UTF-8")];
+    }
+
+    public function getSettings(){
+        $model = Settings::model()->findAll();
+
+        $this->settings = array();
+
+        foreach ($model as $param) {
+            $this->settings[$param->code] = $param->value;
         }
     }
 

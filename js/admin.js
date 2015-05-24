@@ -80,12 +80,6 @@ $(document).ready(function(){
     }
 
     function bindDelete(url){
-        $(document).unbind("keypress");
-        $(document).bind("keypress",function( event ) {
-            if ( event.which == 13 ) {
-                $(".fancybox-inner .b-delete-yes").click();
-            }
-        });
         $(".fancybox-inner .b-delete-yes").click(function(){
 
             progress.setColor("#D26A44");
@@ -291,10 +285,13 @@ $(document).ready(function(){
                 if( !$(".b-popup form").length ){
                     $(".ajax-create").click();
                 }else{
-                    $(".fancybox-wrap form").trigger("submit",[false]);
+                    $(".fancybox-wrap form").trigger("submit",[true]);
                 }
             }
             if( e.keyCode == 13 ){
+                if( $(".fancybox-inner .b-delete-yes").length ){
+                    $(".fancybox-inner .b-delete-yes").trigger("click");
+                }
                 enterVariantsHandler();
             }
             if( e.keyCode == 91 ) cmddown = true;

@@ -39,10 +39,10 @@ class User extends CActiveRecord
 		return array(
 			array('usr_login, usr_password, usr_email', 'required'),
 			array('usr_login, usr_password, usr_email', 'length', 'max'=>128),
-			array('usr_role, usr_name, usr_state', 'safe'),
+			array('usr_rol_id, usr_name', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('usr_id, usr_login, usr_password, usr_email, usr_role, usr_name, usr_state', 'safe', 'on'=>'search'),
+			array('usr_id, usr_login, usr_password, usr_email, usr_rol_id, usr_name', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -54,7 +54,7 @@ class User extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			
+			'role' => array(self::BELONGS_TO, 'Role', 'usr_rol_id'),
 		);
 	}
 
@@ -65,8 +65,7 @@ class User extends CActiveRecord
 			'usr_login' => 'Логин',
 			'usr_password' => 'Пароль',
 			'usr_email' => 'E-mail',
-			'usr_state' => 'Статус',
-			'usr_role' => 'Роль',
+			'usr_rol_id' => 'Роль',
 			'usr_name' => 'Фамилия И.О.',
 		);
 	}
@@ -75,13 +74,14 @@ class User extends CActiveRecord
 		parent::beforeSave();
 		$this->usr_password = ( $this->prevPass == $this->usr_password ) ? $this->usr_password : md5($this->usr_password."eduplan");
 
-		if( !$this->usr_login || !$this->usr_email || !$this->usr_password || !$this->usr_state ){
+		if( !$this->usr_login || !$this->usr_email || !$this->usr_password ){
 	        return false;
 		}
-		if( ($this->usr_role == User::ROLE_ADMIN || $this->usr_role == User::ROLE_ROOT) && Controller::getUserRole() != User::ROLE_ROOT )
+
+		if( ($this->role->code == User::ROLE_ADMIN || $this->role->code == User::ROLE_ROOT) && Controller::getUserRoleFromModel() != User::ROLE_ROOT && Controller::getUserRoleFromModel() != User::ROLE_ADMIN )
 			throw new CHttpException(403,'Доступ запрещен');
 
-		if( !isset($this->prevRole) ) $this->prevRole = $this->usr_role;
+		if( !isset($this->prevRole) ) $this->prevRole = $this->role->code;
 		return true;
 	}
 
@@ -91,7 +91,7 @@ class User extends CActiveRecord
 		$auth=Yii::app()->authManager;
 		//предварительно удаляем старую связь
 		$auth->revoke($this->prevRole, $this->usr_id);
-		$auth->assign($this->usr_role, $this->usr_id);
+		$auth->assign($this->role->code, $this->usr_id);
 		$auth->save();
 		return true;
 	}

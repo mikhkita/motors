@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title></title>
-    <meta name="keywords" content=''>
-    <meta name="description" content=''>
+    <title><?=$this->getParam("TITLE")?></title>
+    <meta name="keywords" content='<?=$this->getParam("KEYWORDS")?>'>
+    <meta name="description" content='<?=$this->getParam("DESCRIPTION")?>'>
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1">

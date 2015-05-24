@@ -66,7 +66,17 @@ return array (
     ),
     'assignments' => 
     array (
+      3 => 
+      array (
+        'bizRule' => NULL,
+        'data' => NULL,
+      ),
       5 => 
+      array (
+        'bizRule' => NULL,
+        'data' => NULL,
+      ),
+      1 => 
       array (
         'bizRule' => NULL,
         'data' => NULL,
