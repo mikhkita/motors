@@ -22,6 +22,18 @@ $(document).ready(function(){
     $(window).resize(resize);
     resize();
 
+    var curSpan = 0,
+        spanLength = $(".b-1 .car h2 span").length;
+    $(".b-1 .car h2 span").eq(0).show();
+
+    setInterval(function(){
+        $(".b-1 .car h2 span").fadeOut(300);
+        curSpan = (curSpan+1 < spanLength)?(curSpan+1):0;
+        setTimeout(function(){
+            $(".b-1 .car h2 span").eq(curSpan).fadeIn(300);
+        },330);
+    },4000);
+
     $('.b-video').fadeIn(500);
 
     $("select[name='1']").change(function(){

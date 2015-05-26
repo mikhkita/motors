@@ -70,7 +70,12 @@
                 <div class="clearfix bot">
                     <div class="car-wrap left">
                         <div class="car">
-                            <h2><?=$this->getText(7)?></h2>
+                            <h2>
+                                <span>С сохранением дилерской гарантии</span>
+                                <span>Никакого вреда автомобилю</span>
+                                <span>Без увеличения расхода топлива</span>
+                                <!-- <?=$this->getText(7)?> -->
+                            </h2>
                             <p><?=$this->getText(8)?></p>
                         </div>
                         <img class="<? if( $images['car'] == "" ) echo "hidden"?>" src="<?=$images['car']?>">

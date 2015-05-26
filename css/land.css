@@ -331,12 +331,16 @@ input:-moz-placeholder {
 						}
 
 						.b-1 .car h2{
+							height: 40px;
 							font-family: 'pf_bague_sans_problack';
 							font-size: 30px;
 							text-align: left;
 							margin-bottom: 3px;
 							color: #feffff;
 						}
+							.b-1 .car h2 span{
+								display: none;
+							}
 						.b-1 .car-wrap img {
 							left: -20px;
   							top: 228px;
