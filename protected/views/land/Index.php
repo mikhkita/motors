@@ -43,9 +43,9 @@
     </ul>
     <div class="b b-1">
         <div class="b-video-cont">
-            <video class="b-video" autoplay loop muted id="bgvideo">
+           <!--  <video class="b-video" autoplay loop muted id="bgvideo">
                 <source src="<?php echo Yii::app()->request->baseUrl;?>/video/5.mp4" type="video/mp4"></source>
-            </video>
+            </video> -->
         </div>
         <div class="b-back">
             <div class="b-block">
@@ -174,6 +174,8 @@
             <? endforeach; ?>
             <option value="другое">Другое</option>
             </select>
+            <img src="<?=$mark->car?>">
+            <img src="<?=$mark->logo?>">
         <? endforeach; ?>
         <?php foreach ($model as $mark): ?>
             <?php foreach ($mark->models as $car_model): ?> 
