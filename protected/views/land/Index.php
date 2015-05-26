@@ -84,7 +84,7 @@
                     <div class="clearfix right typecar">
                         <div>
                             <div class="tc">
-                                <h2 class="<? if( $images['logo'] == '' ) echo 'no-logo'?>"><?=$this->getText(9)?> <span id="logo-name"><?if($images['name'] == "автомобиль"):echo "вашего автомобиля"?><?else: echo $images['name']?><?endif;?></span> <?=$this->getText(10)?></h2>
+                                <h2 class="<? if( $images['logo'] == '' ) echo 'no-logo'?>"><?=$this->getText(9)?> <span id="logo-name"><?if($images['name'] == "автомобиль"):echo "вашего автомобиля"?><?else: echo $images['name'].="<br>"?><?endif;?></span> <?=$this->getText(10)?></h2>
                             </div>
                             <div class="tc <? if( $images['logo'] == '' ) echo 'hidden'?>">
                                 <img id="logo-img" src="<?=$images['logo']?>">

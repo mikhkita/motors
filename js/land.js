@@ -55,7 +55,7 @@ $(document).ready(function(){
                 var carImg = $("select[name='"+mark+"']").attr("data-car");
                 $("#car-img").attr("src",carImg);
                 $("#title-name").text(mark);
-                $("#logo-name").text(mark);
+                $("#logo-name").html(mark+'<br>');
                 if($("select[name='"+mark+"']").attr("data-logo")!='') {
                     var logoImg = $("select[name='"+mark+"']").attr("data-logo");
                     $("#logo-img").attr("src",logoImg).parent().removeClass("hidden").parent().find("h2").removeClass("no-logo");
