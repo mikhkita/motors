@@ -151,43 +151,43 @@ class MarkController extends Controller
 		}
 	}
 
-	public function actionAdminAdd() {
-		$xls = $this->getXLS(Yii::app()->basePath.'/Katalog.xls');
-		$arr= array();
-		$Cars = array("Chevrolet","Ford","Great Wall","Hyundai","KIA","Mazda","Mercedes","Mitsubishi","Nissan","Opel","SsangYong","Toyota","VW","Alfa Romeo");
-		for ($i=1; $i < count($xls); $i++) { 
-			for ($j=0; $j < count($Cars); $j++) { 
-				if($xls[$i][1]==$Cars[$j]) {
-					if(!isset($arr[$Cars[$j]])) $arr[$Cars[$j]] = array();
-					if(!isset($arr[$Cars[$j]][$xls[$i][2]])) $arr[$Cars[$j]][$xls[$i][2]] = array();
-					$engine = array();
-					$str_to_del = array($xls[$i][1],$xls[$i][2]);
-					$engine['name'] = trim(str_ireplace($str_to_del,"", $xls[$i][3]));
-					$engine['hp'] = $xls[$i][4];
-					array_push($arr[$Cars[$j]][$xls[$i][2]], $engine);
-				}
-			}
+	// public function actionAdminAdd() {
+	// 	$xls = $this->getXLS(Yii::app()->basePath.'/Katalog.xls');
+	// 	$arr= array();
+	// 	$Cars = array("Chevrolet","Ford","Great Wall","Hyundai","KIA","Mazda","Mercedes","Mitsubishi","Nissan","Opel","SsangYong","Toyota","VW","Alfa Romeo");
+	// 	for ($i=1; $i < count($xls); $i++) { 
+	// 		for ($j=0; $j < count($Cars); $j++) { 
+	// 			if($xls[$i][1]==$Cars[$j]) {
+	// 				if(!isset($arr[$Cars[$j]])) $arr[$Cars[$j]] = array();
+	// 				if(!isset($arr[$Cars[$j]][$xls[$i][2]])) $arr[$Cars[$j]][$xls[$i][2]] = array();
+	// 				$engine = array();
+	// 				$str_to_del = array($xls[$i][1],$xls[$i][2]);
+	// 				$engine['name'] = trim(str_ireplace($str_to_del,"", $xls[$i][3]));
+	// 				$engine['hp'] = $xls[$i][4];
+	// 				array_push($arr[$Cars[$j]][$xls[$i][2]], $engine);
+	// 			}
+	// 		}
 			
-		}
-		foreach ($arr as $mark => $mark_value) {
-			$model=new Mark;
-			$model->attributes=array("name" => $mark);
-			$model->save();
-			$mark_id = $model->id;
-			foreach ($mark_value as $car_model => $car_model_value) {
-				$model=new CarModel;
-				$model->attributes=array("name" => $car_model,'mark_id' => $mark_id);
-				$model->save();
-				$car_model_id = $model->id;
-				foreach ($car_model_value as $i => $engine) {
-					$model=new Engine;
-					$model->attributes=array("name" => $engine['name'],"horsepower" => $engine['hp'],'model_id' => $car_model_id);
-					$model->save();
-				}
+	// 	}
+	// 	foreach ($arr as $mark => $mark_value) {
+	// 		$model=new Mark;
+	// 		$model->attributes=array("name" => $mark);
+	// 		$model->save();
+	// 		$mark_id = $model->id;
+	// 		foreach ($mark_value as $car_model => $car_model_value) {
+	// 			$model=new CarModel;
+	// 			$model->attributes=array("name" => $car_model,'mark_id' => $mark_id);
+	// 			$model->save();
+	// 			$car_model_id = $model->id;
+	// 			foreach ($car_model_value as $i => $engine) {
+	// 				$model=new Engine;
+	// 				$model->attributes=array("name" => $engine['name'],"horsepower" => $engine['hp'],'model_id' => $car_model_id);
+	// 				$model->save();
+	// 			}
 
-			}
-		}
-	}
+	// 		}
+	// 	}
+	// }
 	private	function getXLS($xls,$rows = false,$titles = false){
 		if( is_array($rows) && $titles === false )
 			throw new CHttpException(404,'Отсутствуют наименования столбцов');
