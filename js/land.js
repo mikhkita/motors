@@ -39,14 +39,49 @@ $(document).ready(function(){
     $("select[name='1']").change(function(){
         var mark = $("select[name='1'] option:selected").val();
         $("select[name='2'],select[name='3']").empty();
-        $("select[name='3']").append('<option value="" disabled selected>Двигатель</option>');
-        $("select[name='"+mark+"'] option").clone().appendTo("select[name='2']");
+        if(mark=="другое") {
+            $("select[name='2']").append('<option value="" disabled>Марка</option><option value="другое" selected>Другое</option>');
+            $("select[name='3']").append('<option value="" disabled>Двигатель</option><option value="другое" selected>Другое</option>');
+            $("#car-img").attr("src",'/upload/images/default.png');
+            if(!$("#logo-img").parent().hasClass("hidden")) {
+                $("#logo-img").attr("src",'').parent().addClass("hidden").parent().find("h2").addClass("no-logo");
+            }
+            $("#title-name").text("автомобиль");
+            $("#logo-name").text('вашего автомобиля');
+        } else {
+            $("select[name='3']").append('<option value="" disabled selected>Двигатель</option>');
+            $("select[name='"+mark+"'] option").clone().appendTo("select[name='2']");
+            if($("select[name='"+mark+"']").attr("data-car")!='') {
+                var carImg = $("select[name='"+mark+"']").attr("data-car");
+                $("#car-img").attr("src",carImg);
+                $("#title-name").text(mark);
+                $("#logo-name").html(mark+'<br>');
+                if($("select[name='"+mark+"']").attr("data-logo")!='') {
+                    var logoImg = $("select[name='"+mark+"']").attr("data-logo");
+                    $("#logo-img").attr("src",logoImg).parent().removeClass("hidden").parent().find("h2").removeClass("no-logo");
+                } else if(!$("#logo-img").parent().hasClass("hidden")) {
+                    $("#logo-img").attr("src",'').parent().addClass("hidden").parent().find("h2").addClass("no-logo");
+                }            
+            } else {
+                $("#car-img").attr("src",'/upload/images/default.png');
+                if(!$("#logo-img").parent().hasClass("hidden")) {
+                    $("#logo-img").attr("src",'').parent().addClass("hidden").parent().find("h2").addClass("no-logo");
+                }
+                $("#title-name").text("автомобиль");
+                $("#logo-name").text('вашего автомобиля');
+            }
+        }
+
     });
 
     $("select[name='2']").change(function(){
         var model = $("select[name='2'] option:selected").val();
         $("select[name='3']").empty();
-        $("select[name='"+model+"'] option").clone().appendTo("select[name='3']");
+        if(model=="другое") {
+            $("select[name='3']").append('<option value="" disabled>Двигатель</option><option value="другое" selected>Другое</option>');
+        } else {
+            $("select[name='"+model+"'] option").clone().appendTo("select[name='3']");
+        }
 
     });
     var select = $("select[name='1']").attr("data-brand");

@@ -220,8 +220,7 @@ $(document).ready(function(){
 
     function bindImageUploader(){
         $(".b-get-image").click(function(){
-            var cont = $(this).parents(".b-image-cont").parent("div");
-            $(".b-for-image-form").load(cont.find(".b-get-image").attr("data-path"), {}, function(){
+            $(".b-for-image-form").load($(".b-get-image").attr("data-path"), {}, function(){
                 $(".upload").addClass("upload-show");
                 $(".b-upload-overlay").addClass("b-upload-overlay-show")
                 $(".plupload_cancel,.b-upload-overlay,.plupload_save").click(function(){

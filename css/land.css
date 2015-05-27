@@ -196,6 +196,7 @@ input:-moz-placeholder {
 		position: relative;
 		width: 100%;
 		height: 750px;	
+		background-image: url('../i/b-1/back.jpg');
 	}
 		.b-video{
 			display: none;
@@ -377,7 +378,7 @@ input:-moz-placeholder {
 				.b-1 .typecar h2{
 					font-size: 18px;
 					color: #e9e9e9;
-					max-width: 193px;
+					max-width: 196px;
 					text-align: left;
 				}
 				.b-1 .typecar .tc h2.no-logo {
@@ -385,7 +386,7 @@ input:-moz-placeholder {
 				}
 				.b-1 .typecar img{
 					max-height: 59px;
-					max-width: 100px;
+					max-width: 90px;
 				}
 
 				.b-1 .typecar input[type="text"], .b-popup input[type="text"]{

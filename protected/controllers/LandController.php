@@ -32,14 +32,15 @@ class LandController extends Controller
 				$pos = strripos($_SERVER['HTTP_REFERER'], $last_word);
 				if($pos) {
 					$model = Mark::model()->findbyPk($value->id);
-					if($model->car!='') $model->car = Yii::app()->request->baseUrl."/".$model->car;
-					if($model->logo!='') $model->logo = Yii::app()->request->baseUrl."/".$model->logo;
-					$images = array("name" => $model->name,"car" => $model->car,"logo" => $model->logo);
+					if($model->car!='') {
+						$model->car = Yii::app()->request->baseUrl."/".$model->car;
+						if($model->logo!='') $model->logo = Yii::app()->request->baseUrl."/".$model->logo;
+						$images = array("name" => $model->name,"car" => $model->car,"logo" => $model->logo);		
+					}
 					break;
 				}			
 			}
 		}
-		;
 		$model = Mark::model()->with('models','models.engines')->findAll();
 		$this->render('Index',array(
 			'model' => $model,
