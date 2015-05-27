@@ -84,29 +84,16 @@
                     <div class="clearfix right typecar">
                         <div>
                             <div class="tc">
-                                <h2 class="<? if( $images['logo'] == "" ) echo "no-logo"?>"><?=$this->getText(9,array("class"=>"inline"))?> <?if($images['name'] == "автомобиль"):echo "вашего автомобиля"?><?else: echo $images['name']?><?endif;?> <?=$this->getText(10,array("class"=>"inline"))?></h2>
+                                <h2 class="<? if( $images['logo'] == "" ) echo "no-logo"?>"><?=$this->getText(9)?> <?if($images['name'] == "автомобиль"):echo "вашего автомобиля"?><?else: echo $images['name']?><?endif;?> <?=$this->getText(10)?></h2>
                             </div>
                             <div class="tc <? if( $images['logo'] == "" ) echo "hidden"?>">
                                 <img src="<?=$images['logo']?>">
                             </div>
                         </div>
+                        <h3>Мы перезвоним и предложим 4 варианта чип-тюнинга в течение 10 минут</h3>
                         <form action="<?php echo Yii::app()->request->baseUrl;?>/kitsend.php" method="post" data-block="#b-popup-2">
-                            <select name="1" data-brand="<?if( $images['name'] != "Автомобиль" ) echo $images['name']?>" required>
-                                <option value="" disabled selected>Марка</option>
-                                <?php foreach ($model as $mark): ?>
-                                    <option value="<?=$mark->name?>"><?=$mark->name?></option>
-                                <? endforeach; ?>
-                            </select>
-                            <input type="hidden" name="1-name" value="Марка"/>
-                            <select name="2" required>
-                                <option value="" disabled selected>Модель</option>
-                            </select>
-                            <input type="hidden" name="2-name" value="Модель"/>
-                            <select name="3" required>
-                                <option value="" disabled selected>Двигатель</option>
-                            </select>
-                            <input type="hidden" name="3-name" value="Двигатель"/>
-                            <input type="text" name="phone" placeholder="Введите ваш телефон" required>
+                            <label for="phone">Введите ваш телефон</label>
+                            <input type="text" id="phone" name="phone" placeholder="+7 (___) ___-__-__" required>
 
                             <input type="hidden" name="subject" value="Заявка на чип-тюнинг"/>
                             <input type="submit" class="b-green-button ajax" value="Рассчитать прирост">

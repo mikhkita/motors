@@ -84,7 +84,7 @@
                     <div class="clearfix right typecar">
                         <div>
                             <div class="tc">
-                                <h2 class="<? if( $images['logo'] == "" ) echo "no-logo"?>"><?=$this->getText(9,array("class"=>"inline"))?> <?if($images['name'] == "автомобиль"):echo "вашего автомобиля"?><?else: echo $images['name']?><?endif;?> <?=$this->getText(10,array("class"=>"inline"))?></h2>
+                                <h2 class="<? if( $images['logo'] == "" ) echo "no-logo"?>"><?=$this->getText(9)?> <?if($images['name'] == "автомобиль"):echo "вашего автомобиля"?><?else: echo $images['name']?><?endif;?> <?=$this->getText(10)?></h2>
                             </div>
                             <div class="tc <? if( $images['logo'] == "" ) echo "hidden"?>">
                                 <img src="<?=$images['logo']?>">
@@ -102,7 +102,7 @@
                                 <option value="" disabled selected>Модель</option>
                             </select>
                             <input type="hidden" name="2-name" value="Модель"/>
-                            <select name="3" required>
+                            <select name="3" style="display:none;">
                                 <option value="" disabled selected>Двигатель</option>
                             </select>
                             <input type="hidden" name="3-name" value="Двигатель"/>
