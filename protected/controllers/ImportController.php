@@ -14,7 +14,7 @@ class ImportController extends Controller
 	{
 		return array(
 			array('allow',
-				'actions'=>array('adminIndex','adminStep2','adminStep3'),
+				'actions'=>array('adminIndex','adminStep2','adminImport'),
 				'roles'=>array('manager'),
 			),
 			array('deny',
@@ -25,7 +25,7 @@ class ImportController extends Controller
 
 	public function actionAdminIndex($partial = false)
 	{
-		// $this->scripts[] = "import";
+		$this->scripts[] = "import";
 		$this->render('adminIndex',array(
 			// 'model'=>$model
 		));
@@ -35,6 +35,7 @@ class ImportController extends Controller
 
 	public function actionAdminStep2($partial = false)
 	{
+		$this->scripts[] = "import";
 
 		if(isset($_POST["excel_name"])) {
 
@@ -42,27 +43,104 @@ class ImportController extends Controller
 
 			$xls = $this->getXLS($excel_path);
 
-			$arr= array();
+			$queryArr = array();
+
+			$arr = array();
 			for ($i=1; $i < count($xls); $i++) { 
-				if(!isset($arr[$xls[$i][1]])) $arr[$xls[$i][1]] = array();
-				if(!isset($arr[$xls[$i][1]][$xls[$i][2]])) $arr[$xls[$i][1]][$xls[$i][2]] = array();
+				$markName = strtolower($xls[$i][1]);
+				$modelName = strtolower($xls[$i][2]);
+
+				if(!isset($arr[$markName])) $arr[$markName] = array("NAME"=>$xls[$i][1],"MODELS"=>array());
+				if(!isset($arr[$markName]["MODELS"][$modelName])) $arr[$markName]["MODELS"][$modelName] = array("NAME"=>$xls[$i][2],"ENGINES"=>array());
+
 				$engine = array();
 				$str_to_del = array($xls[$i][1],$xls[$i][2]);
-				$engine['name'] = trim(str_ireplace($str_to_del,"", $xls[$i][3]));
-				$engine['hp'] = $xls[$i][4];
-				array_push($arr[$xls[$i][1]][$xls[$i][2]], $engine);				
+				$engine['NAME'] = trim(str_ireplace($str_to_del,"", $xls[$i][3]));
+				$engine['HP'] = $xls[$i][4];
+
+				array_push($arr[$markName]["MODELS"][$modelName]["ENGINES"], $engine);	
+
+				array_push($queryArr, "name!='".$xls[$i][1]."'");			
 			}
-			// print_r($arr);
+
+			if( count($arr) ){
+				// Удаление марок, которых нет в экселе
+				$model = Mark::model()->findAll(implode(" AND ", $queryArr));
+				foreach ($model as $item) {
+					$item->delete();
+				}
+			}
+
 			$this->render('adminStep2',array(
 				'arr'=>$arr,
 				'excel_path'=>$excel_path
-				
 			));
 		}
 	}
-	public function actionAdminStep3($partial = false)
-	{
-		print_r($_POST);
+
+	public function actionAdminImport(){
+		if( isset($_POST["mark"]) ){
+			$result = "success";
+			$message = "Марка ".$_POST["mark"]." успешно ";
+
+			$mark = Mark::model()->find("name='".$_POST["mark"]."'");
+
+			if( isset($mark->id) ){
+				foreach ($mark->models as $item) {
+		        	$item->delete();
+		        }
+		        $message .= "обновлена";
+			}else{
+				$mark=new Mark;
+				$mark->attributes = array("name"=>$_POST['mark']);
+				if(!$mark->save()) die(json_encode(array("result"=>"error","message"=>"Ошибка добавления марки ".$_POST["mark"])));
+
+				$message .= "добавлена";
+			}
+
+			foreach ($_POST["models"] as $key => $item) {
+				$model = CarModel::model()->find("name='".mysql_real_escape_string($key)."'");
+
+				if( !isset($model->id) ){
+					$model=new CarModel;
+					$model->attributes = array("name"=>mysql_real_escape_string($key),"mark_id"=>$mark->id);
+					if(!$model->save()) die(json_encode(array("result"=>"error","message"=>"Ошибка добавления модели ".$key." у марки ".$_POST["mark"])));
+				}
+
+				if( !$this->setEngines($item,$model->id) ) die(json_encode(array("result"=>"error","message"=>"Ошибка добавления двигателей. Модели ".$key)));
+			}
+		}else{
+			$result = "error";
+			$message = "Отсутствует название марки";
+		}
+
+		echo json_encode(array("result"=>$result,"message"=>$message));
+	}
+
+	public function setEngines($arr = NULL, $model_id){
+		if( !is_array($arr) || !is_numeric($model_id) ) return false;
+
+		$tableName = Engine::tableName();
+		$addVariants = array();
+
+		$sql = "INSERT INTO `$tableName` (`model_id`,`name`,`horsepower`) VALUES ";
+        foreach ($arr as $i => $engine){
+        	$tmp = explode("|", $engine);
+
+        	if( count($tmp) == 2 ){
+        		if( !is_numeric($tmp[1]) ) return false;
+        		$addVariants[] = "(".$model_id.", '".$tmp[0]."', '".$tmp[1]."')";
+        	}else{
+        		return false;
+        	}
+        }
+
+        if( count($addVariants) > 0 ){
+	        $sql .= implode(",", $addVariants);
+	        if( !Yii::app()->db->createCommand($sql)->execute() ) return false;
+		}
+
+		return true;
 	}
 	
 	public function loadModel($id)

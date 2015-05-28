@@ -349,13 +349,21 @@ input:-moz-placeholder {
 						}
 
 			.b-1 .typecar, .b-popup{
-				width: 330px;
+				width: 333px;
 				padding: 18px 19px 26px 23px;
 				border: 1px solid #303030;
 				background-color: #131313;
 				box-shadow: 3px -3px 38px 1px #222;
 				box-sizing: border-box;
 			}
+				.typecar h3{
+					font-size: 15px;
+					margin-top: 10px;
+					margin-bottom: 20px;
+				}
+				.typecar label{
+					font-size: 16px;
+				}
 				.b-1 .typecar>div {
 					min-height: 55px;
 					margin-bottom: 2px;
@@ -393,14 +401,14 @@ input:-moz-placeholder {
 
 				input::-webkit-input-placeholder {
 					color: #aaa;
-					font-family: 'pf_bague_sans_proregular';
-					font-size: 18px;
+					/*font-family: 'pf_bague_sans_proregular';*/
+					/*font-size: 18px;*/
 				}
 
 				input:-moz-placeholder {
 					color: #aaa;
-					font-family: 'pf_bague_sans_proregular';
-					font-size: 18px;
+					/*font-family: 'pf_bague_sans_proregular';*/
+					/*font-size: 18px;*/
 				}
 
 				.b-green-button{
@@ -458,7 +466,7 @@ input:-moz-placeholder {
 		position: absolute;
 		right: 0px;
 		bottom: 0px;
-		width: 330px;
+		width: 333px;
 		font-size: 0;
 	
 		margin-top: -12px;
@@ -475,7 +483,7 @@ input:-moz-placeholder {
 			.b-1 .sale>div {
 				width: 200px;
 			
-				padding-left: 27px;
+				padding-left: 26px;
 				text-align: left;
 			}
 				.b-1 .sale>div h2 {

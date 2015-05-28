@@ -107,7 +107,7 @@ class Controller extends CController
         $this->texts = array();
 
         foreach ($model as $text) {
-            $this->texts[$text->id] = $text->text;
+            $this->texts[$text->id] = $this->replaceToBr($text->text);
         }
     }
 

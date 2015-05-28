@@ -1418,7 +1418,7 @@ li.ui-autocomplete-category {
     text-align: center;
 }
 .b-import{
-    display: none;
+    /*display: none;*/
 }
     .progress {
         margin-top: 25px;
@@ -1470,7 +1470,7 @@ li.ui-autocomplete-category {
         text-align: left;
         /*width: 100%;*/
         overflow: auto;
-        height: 400px;
+        height: 387px;
         background-color: #FFF4CD;
         border: 1px solid #452716;
         border-radius: 4px;
@@ -1479,6 +1479,44 @@ li.ui-autocomplete-category {
             margin-bottom: 10px;
             list-style: none;
         }
+        .b-log li.error{
+            color: #c00;
+        }
+        .b-log li.success{
+            color: #452716;
+        }
+.b-get-xls{
+    border: 2px solid #452716;
+    border-radius: 10px;
+    /*padding: 20px;*/
+    height: 200px;
+    width: 200px;
+    text-align: center;
+    margin-top: 20px;
+    display: inline-block;
+    background-size: 120px;
+}
+    .b-get-xls img{
+        width: 120px;
+        margin-top: 20px;
+    }
+    .b-import-image{
+        opacity: 0.3;
+    }
+    .b-import-image.active{
+        opacity: 1;
+    }
+    .b-get-xls span{
+        text-decoration: underline;
+        margin-top: 15px;
+        display: inline-block;
+    }
+        .b-get-xls:hover span{
+            text-decoration: none;
+        }
+    .b-import-butt{
+        float: none;
+    }
 .b-debug{
     position: absolute;
     font-size: 10px;
