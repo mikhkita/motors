@@ -12,6 +12,7 @@
 		<?php echo $form->textField($model,'name',array('maxlength'=>255,'required'=>true)); ?>
 		<?php echo $form->error($model,'name'); ?>
 	</div>
+	
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Добавить' : 'Сохранить'); ?>
 		<input type="button" onclick="$.fancybox.close(); return false;" value="Отменить">

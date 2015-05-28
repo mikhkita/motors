@@ -42,7 +42,7 @@ class LandController extends Controller
 			}
 		}
 		$model = Mark::model()->with('models','models.engines')->findAll();
-		$this->render('Index',array(
+		$this->render('index',array(
 			'model' => $model,
 			'images' => $images
 		));
@@ -68,7 +68,7 @@ class LandController extends Controller
 		}
 		;
 		$model = Mark::model()->with('models','models.engines')->findAll();
-		$this->render('Index2',array(
+		$this->render('index2',array(
 			'model' => $model,
 			'images' => $images
 		));
@@ -94,7 +94,7 @@ class LandController extends Controller
 		}
 		;
 		$model = Mark::model()->with('models','models.engines')->findAll();
-		$this->render('Index3',array(
+		$this->render('index3',array(
 			'model' => $model,
 			'images' => $images
 		));

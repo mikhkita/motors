@@ -4,19 +4,25 @@
 <?php $form=$this->beginWidget('CActiveForm'); ?>
 	<table class="b-table" border="1">
 		<tr>
-			<th style="width: 30px;"><? echo $labels['id']; ?></th>
+			<? if( $this->getUserRole() == "root" ):  ?>
+				<th style="width: 30px;"><? echo $labels['id']; ?></th>
+			<? endif; ?>
 			<th><? echo $labels['name']; ?></th>
 			<th style="width: 150px;">Действия</th>
 		</tr>
 		<tr class="b-filter">
-			<td><?php echo $form->hiddenField($filter, 'model_id'); ?></td>
-			<td><?php echo CHtml::activeTextField($filter, 'name'); ?></td>
+			<? if( $this->getUserRole() == "root" ):  ?>
+				<td></td>
+			<? endif; ?>
+			<td><?php echo $form->hiddenField($filter, 'model_id'); ?><?php echo CHtml::activeTextField($filter, 'name'); ?></td>
 			<td><a href="#" class="b-clear-filter">Сбросить фильтр</a></td>
 		</tr>
 		<? if( count($data) ): ?>
 			<? foreach ($data as $i => $item): ?>
 				<tr>
-					<td><?=$item->id?></td>
+					<? if( $this->getUserRole() == "root" ):  ?>
+						<td><?=$item->id?></td>
+					<? endif; ?>
 					<td class="align-left"><?=$item->name?> (<?=$item->horsepower?>)</td>
 					<td class="b-tool-cont">
 						<a href="<?php echo Yii::app()->createUrl('/'.$this->adminMenu["cur"]->code.'/adminupdate',array('id'=>$item->id))?>" class="ajax-form ajax-update b-tool b-tool-update" title="Редактировать <?=$this->adminMenu["cur"]->vin_name?>"></a>

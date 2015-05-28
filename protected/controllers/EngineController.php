@@ -33,6 +33,7 @@ class EngineController extends Controller
 			}
 			$engine = Engine::model()->findByAttributes(array("name" =>$_POST['Engine']['name']));
 			if($engine=="") {	
+				$_POST['Engine']['model_id'] = $_GET['Engine']['model_id'];
 				$model->attributes=$_POST['Engine'];
 				if($model->save()){
 					$this->actionAdminIndex(true);

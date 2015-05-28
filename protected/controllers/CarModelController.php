@@ -33,6 +33,7 @@ class CarModelController extends Controller
 			}
 			$car_model = CarModel::model()->findByAttributes(array("name" =>$_POST['CarModel']['name']));
 			if($car_model=="") {	
+				$_POST['CarModel']['mark_id'] = $_GET['CarModel']['mark_id'];
 				$model->attributes = $_POST['CarModel'];
 				if($model->save()){
 					$this->actionAdminIndex(true);
@@ -83,6 +84,10 @@ class CarModelController extends Controller
 
 	public function actionAdminIndex($partial = false, $error = NULL)
 	{
+		// if (!isset($_GET['CarModel'])) {
+		// 	$_GET['CarModel']["mark_id"] = 
+		// }
+
 		if( !$partial ){
 			$this->layout='admin';
 		}
