@@ -84,6 +84,10 @@ class EngineController extends Controller
 
 	public function actionAdminIndex($partial = false, $error = NULL)
 	{
+		if (!isset($_GET['Engine'])) {
+			$_GET['Engine']["model_id"] = $_GET["model_id"];
+		}
+		
 		if( !$partial ){
 			$this->layout='admin';
 		}

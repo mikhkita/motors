@@ -1,5 +1,6 @@
 <? if( $error != NULL ) echo "<script>alert('".$error."');</script>"; ?>
 <h1><?=$modelName?></h1>
+<a href="<?php echo $this->createUrl('/carModel/adminindex',array('mark_id'=>$_GET["mark_id"]))?>" class="b-link-back">Назад</a>
 <a href="<?php echo $this->createUrl('/'.$this->adminMenu["cur"]->code.'/admincreate')?>" class="ajax-form ajax-create b-butt b-top-butt">Добавить</a>
 <?php $form=$this->beginWidget('CActiveForm'); ?>
 	<table class="b-table" border="1">

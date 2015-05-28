@@ -1485,6 +1485,11 @@ li.ui-autocomplete-category {
         .b-log li.success{
             color: #452716;
         }
+.b-link-back{
+    position: absolute;
+    left: 0px;
+    top: 5px;
+}
 .b-get-xls{
     border: 2px solid #452716;
     border-radius: 10px;

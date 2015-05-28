@@ -84,9 +84,9 @@ class CarModelController extends Controller
 
 	public function actionAdminIndex($partial = false, $error = NULL)
 	{
-		// if (!isset($_GET['CarModel'])) {
-		// 	$_GET['CarModel']["mark_id"] = 
-		// }
+		if (!isset($_GET['CarModel'])) {
+			$_GET['CarModel']["mark_id"] = $_GET["mark_id"];
+		}
 
 		if( !$partial ){
 			$this->layout='admin';
