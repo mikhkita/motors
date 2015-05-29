@@ -1540,3 +1540,22 @@ li.ui-autocomplete-category {
         border: 1px solid #452716;
         padding: 10px;
     }
+#import-table {
+    display: inline-block;
+}
+    #import-table tr:nth-child(n+2) {
+        background-color: white;
+    }
+        #import-table tr td:nth-child(1) {
+            background-color: #F3F3F3;
+        }
+        #import-table tr td,#import-table tr th{
+            padding: 10px;
+        }
+.inst {
+    width: 870px;
+    margin: 20px auto;
+    text-align: left;
+    font-size: 16px;
+    font-weight: bold;
+}
