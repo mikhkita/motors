@@ -40,30 +40,33 @@ $(document).ready(function(){
     $(window).resize(whenResize);
     whenResize();
 
-    $(".b-kit-update,.b-kit-create").fancybox({
-        type: "ajax",
-        closeBtn: false,
-        helpers: {
-            overlay: {
-                locked: true 
+    $(".b-kit-update,.b-kit-create").each(function(){
+        var reload = ($(this).attr("data-reload"))?true:false;
+        $(this).fancybox({
+            type: "ajax",
+            closeBtn: false,
+            helpers: {
+                overlay: {
+                    locked: true 
+                },
+                title : null
             },
-            title : null
-        },
-        padding: 0,
-        margin: 30,
-        beforeShow: function(){
-            var $form = $(".fancybox-inner form");
-            bindForm($form);
-            // bindImageUploader();
-            if( $form.attr("data-beforeShow") && customHandlers[$form.attr("data-beforeShow")] ){
-                customHandlers[$form.attr("data-beforeShow")]($form);
+            padding: 0,
+            margin: 30,
+            beforeShow: function(){
+                var $form = $(".fancybox-inner form");
+                bindForm($form,reload);
+                // bindImageUploader();
+                if( $form.attr("data-beforeShow") && customHandlers[$form.attr("data-beforeShow")] ){
+                    customHandlers[$form.attr("data-beforeShow")]($form);
+                }
+            },
+            afterShow: function(){
+                var field = $(".fancybox-inner").find("input,textarea").eq(0);
+                field.focus();
+                field.setCursorPosition(field.val().length);
             }
-        },
-        afterShow: function(){
-            var field = $(".fancybox-inner").find("input,textarea").eq(0);
-            field.focus();
-            field.setCursorPosition(field.val().length);
-        }
+        }); 
     });
 
     $(".b-kit-switcher").click(function(){
@@ -71,7 +74,7 @@ $(document).ready(function(){
         return false;
     });
 
-    function bindForm($form){
+    function bindForm($form,reload){
         $form.validate({
             ignore: ""
         });
@@ -94,15 +97,19 @@ $(document).ready(function(){
                     url: url,
                     data: $form.serialize(),
                     success: function(msg){
-                        $form.find("input[type='text'],input[type='number'],textarea").val("");
-                        $form.find("input").eq(0).focus();
+                        if( reload ){
+                            location.reload();
+                        }else{
+                            $form.find("input[type='text'],input[type='number'],textarea").val("");
+                            $form.find("input").eq(0).focus();
 
-                        progress.end(function(){
-                            $form.find("input[type=submit]").removeClass("blocked");
-                            setResult(msg);
-                        });
+                            progress.end(function(){
+                                $form.find("input[type=submit]").removeClass("blocked");
+                                setResult(msg);
+                            });
 
-                        $.fancybox.close();
+                            $.fancybox.close();
+                        }
                     }
                 });
             }else{

@@ -22,13 +22,12 @@ $(document).ready(function(){
     $(window).resize(resize);
     resize();
 
-    var curSpan = 0,
-        spanLength = $(".b-1 .car h2 span").length;
+    var curSpan = 0;
     $(".b-1 .car h2 span").eq(0).show();
 
     setInterval(function(){
         $(".b-1 .car h2 span").fadeOut(300);
-        curSpan = (curSpan+1 < spanLength)?(curSpan+1):0;
+        curSpan = (curSpan+1 < $(".b-1 .car h2 span").length)?(curSpan+1):0;
         setTimeout(function(){
             $(".b-1 .car h2 span").eq(curSpan).fadeIn(300);
         },330);

@@ -71,7 +71,7 @@
                     <div class="car-wrap left">
                         <div class="car">
                             <h2>
-                                <?=$this->replaceToSpan($this->getText(15))?>
+                                <?=$this->replaceToSpan($this->getText(15,array("reload"=>true)))?>
                             </h2>
                             <p><?=$this->getText(8)?></p>
                         </div>

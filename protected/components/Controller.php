@@ -88,8 +88,9 @@ class Controller extends CController
 
             if( !Yii::app()->user->isGuest ){
                 $class = ( $params != NULL && isset($params["class"]) )?(" ".$params["class"]):"";
+                $attributes = ( $params != NULL && isset($params["reload"]) )?(' data-reload="true"'):"";
                 $url = Yii::app()->createUrl('/text/adminupdate',array('id'=>$id,'json'=>'1'));
-                $output .= '<font class="b-kit-update'.$class.'" href="'.$url.'" data-id="'.$id.'">';
+                $output .= '<font class="b-kit-update'.$class.'" href="'.$url.'" data-id="'.$id.'"'.$attributes.'>';
             }
             $this->texts[(int)$id] = str_replace("\n", "<br>", $this->texts[(int)$id]);
             $output .= $this->texts[(int)$id];
