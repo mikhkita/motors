@@ -71,10 +71,7 @@
                     <div class="car-wrap left">
                         <div class="car">
                             <h2>
-                                <span>С сохранением дилерской гарантии</span>
-                                <span>Никакого вреда автомобилю</span>
-                                <span>Без увеличения расхода топлива</span>
-                                <!-- <?=$this->getText(7)?> -->
+                                <?=$this->replaceToSpan($this->getText(15))?>
                             </h2>
                             <p><?=$this->getText(8)?></p>
                         </div>

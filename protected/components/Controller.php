@@ -139,6 +139,10 @@ class Controller extends CController
         return str_replace("\n", "<br>", $str);
     }
 
+    public function replaceToSpan($str){
+        return "<span>".str_replace("<br>", "</span><span>", $str)."</span>";
+    }
+
     public function getMenuCodes(){
         $model = Page::model()->findAllByPk(array(1,2),array("order"=>"pag_id ASC"));
         return $model;
