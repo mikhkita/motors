@@ -41,14 +41,11 @@ class LandController extends Controller
 				}			
 			}
 		}
-		$criteria=new CDbCriteria();
-		$criteria->order = 'name ASC';
-		// $criteria->with = array(
-  //           // 'models',
-  //           'models.engines'
-  //           );
 
-		$model = Mark::model()->findAll($criteria);
+		$model = Mark::model()->with(array('models','models.engines'))->findAll(array(
+				'order' => 't.name ASC',
+				'limit' => 1000
+			));
 		$this->render('index',array(
 			'model' => $model,
 			'images' => $images

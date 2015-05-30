@@ -1491,6 +1491,7 @@ li.ui-autocomplete-category {
     top: 5px;
 }
 .b-get-xls{
+    margin-bottom: 10px;
     border: 2px solid #452716;
     border-radius: 10px;
     /*padding: 20px;*/
@@ -1543,11 +1544,21 @@ li.ui-autocomplete-category {
 #import-table {
     display: inline-block;
 }
-    #import-table tr:nth-child(n+2) {
-        background-color: white;
+    #import-table tr:first-child{
+        color: #F5E9BC;
+        text-shadow: 0 1px 1px rgba(0,0,0,0.5);
+        background-color: #D26A44;
     }
+    #import-table tr:nth-child(n+2) {
+        background-color: #F5E9BC;
+    }
+        #import-table tr:nth-child(2n+3){
+            background-color: #FFF4CD;
+        }
         #import-table tr td:nth-child(1) {
-            background-color: #F3F3F3;
+            color: #F5E9BC;
+            text-shadow: 0 1px 1px rgba(0,0,0,0.5);
+            background-color: #D26A44;
         }
         #import-table tr td,#import-table tr th{
             padding: 10px;
@@ -1557,5 +1568,5 @@ li.ui-autocomplete-category {
     margin: 20px auto;
     text-align: left;
     font-size: 16px;
-    font-weight: bold;
+    line-height: 24px;
 }
